@@ -41,7 +41,7 @@ class SplashScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.5.w),
               child: Text(
-                'The Smart Healthcare System for Everyone',
+                'The Smart Healthcare System',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.sp,
