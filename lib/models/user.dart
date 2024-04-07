@@ -55,7 +55,7 @@ class User{
           password: "",
           username: json['username'],
           role:role,
-          age:json['age'],
+          age:json['age'] as int,
           gender:json['gender'],
           address: json['address'],
           phone:json['phone'],
