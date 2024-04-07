@@ -21,9 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
       MaterialStateProperty.resolveWith<Icon?>(
     (Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
-        return Icon(Icons.person);
+        return const Icon(Icons.person);
       }
-      return Icon(
+      return const Icon(
         Icons.medical_services,
         color: Colors.white,
       );
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         backgroundColor: Colors.black54,
         actions: [
           Obx(() => Switch(
@@ -67,23 +67,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 35.h,
                   ),
                   TextFormField(
+                    controller: emailController,
                     decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      disabledBorder: OutlineInputBorder(
+                      hintStyle: const TextStyle(color: Colors.white),
+                      disabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(width: 1, color: Colors.white),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(width: 1, color: Colors.white),
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                           borderSide: BorderSide(
                             width: 1,
                           )),
                       labelText: "Email",
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: const TextStyle(color: Colors.white),
                       prefixIcon: Icon(
                         Icons.email,
                         color: Theme.of(context).primaryColor,
@@ -100,24 +101,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 3.h),
                   TextFormField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      disabledBorder: OutlineInputBorder(
+                      hintStyle: const TextStyle(color: Colors.white),
+                      disabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(width: 1, color: Colors.white),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(width: 1, color: Colors.white),
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                           borderSide: BorderSide(
                             width: 1,
                           )),
                       labelText: "Password",
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: const TextStyle(color: Colors.white),
                       prefixIcon: Icon(
                         Icons.password,
                         color: Theme.of(context).primaryColor,
