@@ -72,6 +72,7 @@ class Doctor {
   late String email;
   late DoctorRole role;
   late String name;
+  late int age;
   late String specialization;
   late String hospital;
   String? address;
@@ -85,6 +86,7 @@ class Doctor {
     required this.email,
     required this.role,
     required this.name,
+    required this.age,
     required this.specialization,
     required this.hospital,
     this.address,
@@ -100,6 +102,7 @@ class Doctor {
       email: json['email'] as String,
       role: json['role']=="doctor"?DoctorRole.doctor:DoctorRole.user,
       name: json['name'] as String,
+      age:json['age'] as int,
       specialization: json['specialization'] as String,
       hospital: json['hospital'] as String,
       address: json['address'] as String?,
@@ -115,6 +118,7 @@ class Doctor {
       'password': password,
       'email': email,
       'role': role.name,
+      'age':age,
       'name': name,
       'specialization': specialization,
       'hospital': hospital,
