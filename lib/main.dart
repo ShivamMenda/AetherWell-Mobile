@@ -1,3 +1,4 @@
+import 'package:aetherwell/bindings/splash_binding.dart';
 import 'package:aetherwell/routes/app_pages.dart';
 import 'package:aetherwell/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,14 @@ class MyApp extends StatelessWidget {
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500)),
           primarySwatch: Colors.blue,
+          primaryColor: Colors.blueAccent,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          brightness: Brightness.light,
+          brightness: Brightness.dark,
           useMaterial3: true,
         ),
         getPages: AppPages.pages,
-        initialRoute: AppRoutes.home,
+        initialBinding: SplashBinding(),
+        initialRoute: AppRoutes.splash,
       );
     });
   }

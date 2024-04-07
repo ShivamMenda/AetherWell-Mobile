@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.6
   sizer: ^2.0.15
   mongo_dart: ^0.10.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
