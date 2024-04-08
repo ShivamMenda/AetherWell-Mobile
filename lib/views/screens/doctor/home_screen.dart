@@ -129,7 +129,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
                   return AppointmentCard(
                     appointmentDetails: appointmentList[index],
-                    tileColor: tileColor!,
+                    tileColor: tileColor,
                     onViewDetails: () {
                       // Handle viewing more details
                     },

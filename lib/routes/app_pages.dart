@@ -1,3 +1,4 @@
+import 'package:aetherwell/bindings/doctor/doctor_home_binding.dart';
 import 'package:aetherwell/bindings/login_binding.dart';
 import 'package:aetherwell/bindings/signup_binding.dart';
 import 'package:aetherwell/bindings/splash_binding.dart';
@@ -23,6 +24,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.doctorHome,
       page: () => DoctorHomeScreen(),
+      binding: DoctorHomeBinding(),
     ),
     GetPage(
       name: AppRoutes.login,
