@@ -148,7 +148,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Sign In",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        //Navigate to respective routes
+                        if(!authController.isUser.value) {
+                          Get.offAndToNamed(AppRoutes.doctorHome);
+                        }else{
+                          Get.offAndToNamed(AppRoutes.userHome);
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(
