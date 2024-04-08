@@ -1,9 +1,9 @@
 import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utilsfordoc/BottomNavigation.dart';
-import '../../utilsfordoc/DailyAppointmentsListCard.dart';
-import '../../utilsfordoc/DailyAppointmentsMainCard.dart';
+import '../../widgets/doctor/BottomNavigation.dart';
+import '../../widgets/doctor/DailyAppointmentsListCard.dart';
+import '../../widgets/doctor/DailyAppointmentsMainCard.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   DoctorHomeScreen({Key? key}) : super(key: key);
