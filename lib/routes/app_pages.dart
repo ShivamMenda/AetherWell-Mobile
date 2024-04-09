@@ -1,7 +1,9 @@
 import 'package:aetherwell/bindings/doctor/doctor_home_binding.dart';
+import 'package:aetherwell/bindings/doctor/doctor_profile_binding.dart';
 import 'package:aetherwell/bindings/login_binding.dart';
 import 'package:aetherwell/bindings/signup_binding.dart';
 import 'package:aetherwell/bindings/splash_binding.dart';
+import 'package:aetherwell/views/screens/doctor/doctor_profile.dart';
 import 'package:aetherwell/views/screens/doctor/home_screen.dart';
 import 'package:aetherwell/views/screens/login_screen.dart';
 import 'package:aetherwell/views/screens/signup_screen.dart';
@@ -35,6 +37,11 @@ class AppPages {
       name: AppRoutes.signup,
       page: () => SignUpScreen(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.doctorProfile,
+      page: () => DoctorProfile(),
+      binding: DoctorProfileBinding(),
     ),
   ];
 }

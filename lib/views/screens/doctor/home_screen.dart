@@ -1,4 +1,5 @@
 import 'package:aetherwell/controllers/auth_controller.dart';
+import 'package:aetherwell/views/widgets/doctor/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/doctor/BottomNavigation.dart';
@@ -60,7 +61,9 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
             },
           ),
         ],
+
       ),
+      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -140,16 +143,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavigaton(
-        initialIndex: _currentIndex,
-        onIndexChanged: (index) {
-          setState(() {
-            _currentIndex = index;
-            // Handle navigation or state change based on the index here
-            // Will Add this on implemetation of other Screens
-          });
-        },
       ),
     );
   }
