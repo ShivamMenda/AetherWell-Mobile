@@ -1,10 +1,11 @@
 import 'package:aetherwell/controllers/auth_controller.dart';
-import 'package:aetherwell/views/widgets/doctor/Drawer.dart';
+import 'package:aetherwell/controllers/doctor/home_page_controller.dart';
+import 'package:aetherwell/views/widgets/doctor/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../widgets/doctor/BottomNavigation.dart';
-import '../../widgets/doctor/DailyAppointmentsListCard.dart';
-import '../../widgets/doctor/DailyAppointmentsMainCard.dart';
+import '../../widgets/doctor/bottom_navigation.dart';
+import '../../widgets/doctor/daily_appointments_list_card.dart';
+import '../../widgets/doctor/daily_appointments_main_card.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   DoctorHomeScreen({Key? key}) : super(key: key);
@@ -16,36 +17,10 @@ class DoctorHomeScreen extends StatefulWidget {
 class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   TextEditingController searchController = TextEditingController();
   final AuthController authController = Get.find<AuthController>();
-  int _currentIndex = 0;
+  final DoctorHomeController doctorHomeController =
+      Get.find<DoctorHomeController>();
 
   // Dummy List Replace By original List
-  List<Map<String, String>> appointmentList = [
-    {
-      'patientName': 'John Doe',
-      'diagnostics': 'Fever',
-      'gender': 'Male',
-    },
-    {
-      'patientName': 'Jane Smith',
-      'diagnostics': 'Headache',
-      'gender': 'Female',
-    },
-    {
-      'patientName': 'David Johnson',
-      'diagnostics': 'Sore throat',
-      'gender': 'Male',
-    },
-    {
-      'patientName': 'Emily Brown',
-      'diagnostics': 'Cough',
-      'gender': 'Female',
-    },
-    {
-      'patientName': 'Michael Williams',
-      'diagnostics': 'Fatigue',
-      'gender': 'Male',
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +36,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
             },
           ),
         ],
-
       ),
       drawer: CustomDrawer(),
       body: SingleChildScrollView(
@@ -69,7 +43,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-
               //Search Bar
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
@@ -108,8 +81,10 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
               //Appointment Details Card
               AppointmentDetailsCard(
-                dailyAppointments: 15, // Replace with your actual value from Api Calls
-                weeklyAppointments: 45, // Replace with your actual value from Api Calls
+                dailyAppointments:
+                    15, // Replace with your actual value from Api Calls
+                weeklyAppointments:
+                    45, // Replace with your actual value from Api Calls
               ),
               SizedBox(height: 20),
               Text(
@@ -125,13 +100,13 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: appointmentList.length,
+                itemCount: doctorHomeController.appointmentList.length,
                 itemBuilder: (BuildContext context, int index) {
-
-                  Color? tileColor =Colors.blueAccent.withOpacity(0.05);
+                  Color? tileColor = Colors.blueAccent.withOpacity(0.05);
 
                   return AppointmentCard(
-                    appointmentDetails: appointmentList[index],
+                    appointmentDetails:
+                        doctorHomeController.appointmentList[index],
                     tileColor: tileColor,
                     onViewDetails: () {
                       // Handle viewing more details
@@ -139,7 +114,6 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   );
                 },
               ),
-
             ],
           ),
         ),
@@ -147,5 +121,3 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     );
   }
 }
-
-

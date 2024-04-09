@@ -1,7 +1,7 @@
+import 'package:aetherwell/controllers/doctor/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/auth_controller.dart';
 import '../../widgets/doctor/drawer.dart';
 
 class DoctorProfile extends StatefulWidget {
@@ -12,27 +12,10 @@ class DoctorProfile extends StatefulWidget {
 }
 
 class _DoctorProfileState extends State<DoctorProfile> {
-  final AuthController authController = Get.find<AuthController>();
-  final TextEditingController name = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController phone = TextEditingController();
-  final TextEditingController specialization = TextEditingController();
-  final TextEditingController clinic = TextEditingController();
-  final TextEditingController experience = TextEditingController();
+  final DoctorProfileController doctorProfileController =
+      Get.find<DoctorProfileController>();
 
   bool showBottomSheet = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Replace hardcoded values with actual values fetched from the API
-    name.text = "Doctor Name";
-    email.text = "Doctor Email";
-    phone.text = "Phone Number";
-    specialization.text = "Cardiology";
-    clinic.text = "Clinic Name / Hospital Name";
-    experience.text = "2";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +27,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              authController.logout();
+              doctorProfileController.authController.logout();
             },
           ),
         ],
@@ -65,14 +48,18 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 SizedBox(height: 20),
                 Text(
                   "Personal Information",
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage('https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg='), // Replace the URL with any image URL
+                      backgroundImage: NetworkImage(
+                          'https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg='), // Replace the URL with any image URL
                       radius: 50,
                       backgroundColor: Colors.blueAccent,
                     ),
@@ -81,28 +68,37 @@ class _DoctorProfileState extends State<DoctorProfile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildTextFormField(name, "Name", Icons.person),
-                          _buildTextFormField(email, "Email", Icons.email),
+                          _buildTextFormField(doctorProfileController.name,
+                              "Name", Icons.person),
+                          _buildTextFormField(doctorProfileController.email,
+                              "Email", Icons.email),
                         ],
                       ),
                     ),
                   ],
                 ),
-                _buildTextFormField(phone, "Phone", Icons.phone),
+                _buildTextFormField(
+                    doctorProfileController.phone, "Phone", Icons.phone),
                 SizedBox(height: 10),
-                _buildTextFormField(experience, "About me",Icons.text_rotation_angledown_sharp),
+                _buildTextFormField(doctorProfileController.experience,
+                    "About me", Icons.text_rotation_angledown_sharp),
                 SizedBox(height: 30),
                 Text(
                   "Professional Information",
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
-                _buildTextFormField(specialization, "Specialization", Icons.category),
+                _buildTextFormField(doctorProfileController.specialization,
+                    "Specialization", Icons.category),
                 SizedBox(height: 10),
-                _buildTextFormField(clinic, "Clinic / Hospital", Icons.local_hospital),
+                _buildTextFormField(doctorProfileController.clinic,
+                    "Clinic / Hospital", Icons.local_hospital),
                 SizedBox(height: 10),
-                _buildTextFormField(experience, "Experience (Years)", Icons.timer),
-
+                _buildTextFormField(doctorProfileController.experience,
+                    "Experience (Years)", Icons.timer),
               ],
             ),
           ),
@@ -124,14 +120,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
     );
   }
 
-  Widget _buildTextFormField(TextEditingController controller, String label, IconData icon) {
+  Widget _buildTextFormField(
+      TextEditingController controller, String label, IconData icon) {
     return TextFormField(
       readOnly: true,
       controller: controller,
-      style: TextStyle(color: Colors.white70,fontSize: 18),
+      style: TextStyle(color: Colors.white70, fontSize: 18),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white70,fontSize: 18),
+        labelStyle: TextStyle(color: Colors.white70, fontSize: 18),
         enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
         focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none),
         prefixIcon: Icon(icon, color: Colors.white70),
@@ -145,15 +142,24 @@ class _DoctorProfileState extends State<DoctorProfile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Edit Your Profile Here",style: TextStyle(color: Colors.blueGrey,fontSize: 22,fontWeight: FontWeight.bold),),
-          _buildTextField(email, "Email", Icons.email),
-          _buildTextField(phone, "Phone", Icons.phone),
-          _buildTextField(specialization, "Specialization", Icons.category),
-          _buildTextField(clinic, "Clinic / Hospital", Icons.local_hospital),
-          _buildTextField(experience, "Experience (Years)", Icons.timer),
+          Text(
+            "Edit Your Profile Here",
+            style: TextStyle(
+                color: Colors.blueGrey,
+                fontSize: 22,
+                fontWeight: FontWeight.bold),
+          ),
+          _buildTextField(doctorProfileController.email, "Email", Icons.email),
+          _buildTextField(doctorProfileController.phone, "Phone", Icons.phone),
+          _buildTextField(doctorProfileController.specialization,
+              "Specialization", Icons.category),
+          _buildTextField(doctorProfileController.clinic, "Clinic / Hospital",
+              Icons.local_hospital),
+          _buildTextField(doctorProfileController.experience,
+              "Experience (Years)", Icons.timer),
           SizedBox(height: 16),
           MaterialButton(
-            onPressed: (){},
+            onPressed: () {},
             child: Text("Update Now"),
             color: Colors.blueAccent,
             minWidth: MediaQuery.of(context).size.width,
@@ -163,19 +169,20 @@ class _DoctorProfileState extends State<DoctorProfile> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String label, IconData icon) {
+  Widget _buildTextField(
+      TextEditingController controller, String label, IconData icon) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),
         labelStyle: TextStyle(color: Colors.white70),
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
       ),
       style: TextStyle(color: Colors.white70),
     );
   }
 }
-
-

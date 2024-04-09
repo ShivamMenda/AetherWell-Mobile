@@ -1,9 +1,8 @@
 import 'package:aetherwell/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get.dart';
-class CustomDrawer extends StatelessWidget {
 
+class CustomDrawer extends StatelessWidget {
   CustomDrawer({Key? key}) : super(key: key);
 
   @override
@@ -37,7 +36,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.receipt_outlined),
             title: Text('Patient\'s Details'),
             onTap: () {
-              Navigator.pop(context); // Close the drawer
+              Get.back(); // Close the drawer
               // Navigate to Patient's Details screen
             },
           ),
@@ -45,7 +44,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.date_range_outlined),
             title: Text('Appointment'),
             onTap: () {
-              Navigator.pop(context); // Close the drawer
+              Get.back(); // Close the drawer
               // Navigate to Appointment screen
             },
           ),

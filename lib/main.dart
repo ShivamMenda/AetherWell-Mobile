@@ -19,14 +19,16 @@ class MyApp extends StatelessWidget {
         title: "AetherWell",
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-              backgroundColor: Colors.blueAccent,
-              elevation: 0,
-              toolbarHeight: 8.h,
-              centerTitle: true,
-              titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500)),
+            backgroundColor: Colors.blueAccent,
+            elevation: 0,
+            toolbarHeight: 8.h,
+            centerTitle: true,
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           primarySwatch: Colors.blue,
           primaryColor: Colors.blueAccent,
           visualDensity: VisualDensity.adaptivePlatformDensity,

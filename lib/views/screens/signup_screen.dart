@@ -24,8 +24,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final AuthController authController = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
   final MaterialStateProperty<Icon?> thumbIcon =
-      MaterialStateProperty.resolveWith<Icon?>(
-    (Set<MaterialState> states) {
+  MaterialStateProperty.resolveWith<Icon?>(
+        (Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return const Icon(Icons.person);
       }
@@ -43,13 +43,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.black54,
         actions: [
           Obx(() => Switch(
-                activeColor: Theme.of(context).primaryColor,
-                thumbIcon: thumbIcon,
-                inactiveThumbColor: Colors.red,
-                inactiveTrackColor: Colors.red[300],
-                value: authController.isUser.value,
-                onChanged: (value) => {authController.isUser.value = value},
-              ))
+            activeColor: Theme.of(context).primaryColor,
+            thumbIcon: thumbIcon,
+            inactiveThumbColor: Colors.red,
+            inactiveTrackColor: Colors.red[300],
+            value: authController.isUser.value,
+            onChanged: (value) => {authController.isUser.value = value},
+          ))
         ],
       ),
       body: SingleChildScrollView(
@@ -62,10 +62,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Obx(() => Text(
-                        "${authController.isUser.value == true ? "User" : "Doctor"} Registration",
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
-                      )),
+                    "${authController.isUser.value == true ? "User" : "Doctor"} Registration",
+                    style: TextStyle(
+                        fontSize: 20.sp, fontWeight: FontWeight.bold),
+                  )),
                   SizedBox(
                     height: 2.h,
                   ),
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextFormField(
                     controller: fullNameController,
                     decoration:
-                        textInputDecoration(context, "Full Name", Icons.person),
+                    textInputDecoration(context, "Full Name", Icons.person),
                     validator: (val) {
                       if (val!.isNotEmpty) {
                         return null;
@@ -130,8 +130,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // check tha validation
                     validator: (val) {
                       return RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(val!)
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(val!)
                           ? null
                           : "Please enter a valid email";
                     },
@@ -207,88 +207,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 1.h,
                   ),
                   Obx(() => TextFormField(
-                        controller: specaddressController,
-                        decoration: InputDecoration(
-                            labelText: authController.isUser.value == true
-                                ? "Address"
-                                : "Specialization",
-                            labelStyle: const TextStyle(color: Colors.white),
-                            hintStyle: const TextStyle(color: Colors.white),
-                            disabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.white),
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.white),
-                            ),
-                            border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                  width: 1,
-                                )),
-                            prefixIcon: Icon(
-                              authController.isUser.value == true
-                                  ? Icons.home
-                                  : Icons.medical_services,
-                              color: Theme.of(context).primaryColor,
+                    controller: specaddressController,
+                    decoration: InputDecoration(
+                        labelText: authController.isUser.value == true
+                            ? "Address"
+                            : "Specialization",
+                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.white),
+                        disabledBorder: const OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                          BorderSide(width: 1, color: Colors.white),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                          BorderSide(width: 1, color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                              width: 1,
                             )),
-                        validator: (val) {
-                          if (val!.length < 3) {
-                            return "Enter Valid Data";
-                          } else {
-                            return null;
-                          }
-                        },
-                      )),
+                        prefixIcon: Icon(
+                          authController.isUser.value == true
+                              ? Icons.home
+                              : Icons.medical_services,
+                          color: Theme.of(context).primaryColor,
+                        )),
+                    validator: (val) {
+                      if (val!.length < 3) {
+                        return "Enter Valid Data";
+                      } else {
+                        return null;
+                      }
+                    },
+                  )),
                   SizedBox(
                     height: 1.h,
                   ),
                   Obx(() => TextFormField(
-                        controller: hospPhoneController,
-                        decoration: InputDecoration(
-                            labelText: authController.isUser.value == true
-                                ? "Phone"
-                                : "Hospital Name",
-                            labelStyle: const TextStyle(color: Colors.white),
-                            hintStyle: const TextStyle(color: Colors.white),
-                            disabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.white),
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide:
-                                  BorderSide(width: 1, color: Colors.white),
-                            ),
-                            border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                  width: 1,
-                                )),
-                            prefixIcon: Icon(
-                              authController.isUser.value == true
-                                  ? Icons.phone
-                                  : Icons.local_hospital,
-                              color: Theme.of(context).primaryColor,
+                    controller: hospPhoneController,
+                    decoration: InputDecoration(
+                        labelText: authController.isUser.value == true
+                            ? "Phone"
+                            : "Hospital Name",
+                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.white),
+                        disabledBorder: const OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                          BorderSide(width: 1, color: Colors.white),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                          BorderSide(width: 1, color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                              width: 1,
                             )),
-                        validator: (val) {
-                          if (val!.length < 3) {
-                            return "Enter Valid Data";
-                          } else {
-                            return null;
-                          }
-                        },
-                      )),
+                        prefixIcon: Icon(
+                          authController.isUser.value == true
+                              ? Icons.phone
+                              : Icons.local_hospital,
+                          color: Theme.of(context).primaryColor,
+                        )),
+                    validator: (val) {
+                      if (val!.length < 3) {
+                        return "Enter Valid Data";
+                      } else {
+                        return null;
+                      }
+                    },
+                  )),
                   SizedBox(
                     height: 2.h,
                   ),
@@ -296,7 +296,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).primaryColor,
+                          foregroundColor: Theme.of(context).primaryColor,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
@@ -335,26 +335,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
   InputDecoration textInputDecoration(
       BuildContext context, String? label, IconData? icon) {
     return InputDecoration(
-      labelText: label,
-      labelStyle: const TextStyle(color: Colors.white),
-      hintStyle: const TextStyle(color: Colors.white),
-      disabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        borderSide: BorderSide(width: 1, color: Colors.white),
-      ),
-      enabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        borderSide: BorderSide(width: 1, color: Colors.white),
-      ),
-      border: const OutlineInputBorder(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
+        disabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(
-            width: 1,
-          )),
-      prefixIcon: Icon(
-        icon,
-        color: Theme.of(context).primaryColor,
-      ),
-    );
-  }
+          borderSide: BorderSide(width: 1, color: Colors.white),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          borderSide: BorderSide(width: 1, color: Colors.white),
+        ),
+        border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              width: 1,
+            )),
+        prefixIcon: Icon(
+            icon,
+            color: Theme.of(context).primaryColor,
+            ),
+        );
+    }
 }
