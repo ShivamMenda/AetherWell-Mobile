@@ -5,6 +5,7 @@ import 'package:aetherwell/bindings/signup_binding.dart';
 import 'package:aetherwell/bindings/splash_binding.dart';
 import 'package:aetherwell/bindings/user/user_home_binding.dart';
 import 'package:aetherwell/bindings/user/user_profile_binding.dart';
+import 'package:aetherwell/bindings/user/user_recommendation_bindings.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_appointment.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_profile.dart';
 import 'package:aetherwell/views/screens/doctor/home_screen.dart';
@@ -59,6 +60,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.userRecommendation,
       page: () => UserRecommendationScreen(),
+      binding: UserRecommendationBinding(),
     ),
     GetPage(
       name: AppRoutes.userAppointments,
