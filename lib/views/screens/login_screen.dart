@@ -18,8 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthController authController = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
   final MaterialStateProperty<Icon?> thumbIcon =
-  MaterialStateProperty.resolveWith<Icon?>(
-        (Set<MaterialState> states) {
+      MaterialStateProperty.resolveWith<Icon?>(
+    (Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return const Icon(Icons.person);
       }
@@ -37,13 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.black54,
         actions: [
           Obx(() => Switch(
-            activeColor: Theme.of(context).primaryColor,
-            thumbIcon: thumbIcon,
-            inactiveThumbColor: Colors.red,
-            inactiveTrackColor: Colors.red[300],
-            value: authController.isUser.value,
-            onChanged: (value) => {authController.isUser.value = value},
-          ))
+                activeColor: Theme.of(context).primaryColor,
+                thumbIcon: thumbIcon,
+                inactiveThumbColor: Colors.red,
+                inactiveTrackColor: Colors.red[300],
+                value: authController.isUser.value,
+                onChanged: (value) => {authController.isUser.value = value},
+              ))
         ],
       ),
       body: SingleChildScrollView(
@@ -56,12 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Obx(() => Text(
-                    "${authController.isUser.value == true ? "User" : "Doctor"} Sign In",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold),
-                  )),
+                        "${authController.isUser.value == true ? "User" : "Doctor"} Sign In",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold),
+                      )),
                   Image.asset(
                     "assets/images/login.png",
                     height: 35.h,
@@ -93,8 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     // check tha validation
                     validator: (val) {
                       return RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(val!)
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(val!)
                           ? null
                           : "Please enter a valid email";
                     },
@@ -133,15 +133,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 4.h,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          foregroundColor: Theme.of(context).primaryColor,
-                          elevation: 0,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          elevation: 1,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
                       child: const Text(
@@ -149,17 +149,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       onPressed: () {
-                        //Navigate to respective routes
-                        if(!authController.isUser.value) {
+                        authController.isUser.value == true
+                            ? authController.userLogin()
+                            : authController.doctorLogin(); // For testing
+                        if (!authController.isUser.value) {
                           Get.offAndToNamed(AppRoutes.doctorHome);
-                        }else{
+                        } else {
                           Get.offAndToNamed(AppRoutes.userHome);
                         }
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 2.h,
                   ),
                   Text.rich(TextSpan(
                     text: "Don't have an account? ",

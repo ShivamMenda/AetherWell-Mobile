@@ -3,10 +3,17 @@ import 'package:aetherwell/bindings/doctor/doctor_profile_binding.dart';
 import 'package:aetherwell/bindings/login_binding.dart';
 import 'package:aetherwell/bindings/signup_binding.dart';
 import 'package:aetherwell/bindings/splash_binding.dart';
+import 'package:aetherwell/bindings/user/user_home_binding.dart';
+import 'package:aetherwell/bindings/user/user_profile_binding.dart';
+import 'package:aetherwell/views/screens/doctor/doctor_appointment.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_profile.dart';
 import 'package:aetherwell/views/screens/doctor/home_screen.dart';
+import 'package:aetherwell/views/screens/doctor/patient_details.dart';
 import 'package:aetherwell/views/screens/login_screen.dart';
 import 'package:aetherwell/views/screens/signup_screen.dart';
+import 'package:aetherwell/views/screens/user/profile_screen.dart';
+import 'package:aetherwell/views/screens/user/user_appointments.dart';
+import 'package:aetherwell/views/screens/user/user_recommendation_screen.dart';
 import 'app_routes.dart';
 import 'package:get/get.dart';
 import 'package:aetherwell/views/screens/splash_screen.dart';
@@ -22,6 +29,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.userHome,
       page: () => UserHomeScreen(),
+      binding: UserHomeBinding(),
     ),
     GetPage(
       name: AppRoutes.doctorHome,
@@ -42,6 +50,27 @@ class AppPages {
       name: AppRoutes.doctorProfile,
       page: () => DoctorProfile(),
       binding: DoctorProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.userProfile,
+      page: () => UserProfileScreen(),
+      binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.userRecommendation,
+      page: () => UserRecommendationScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.userAppointments,
+      page: () => UserAppointmentScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.doctorAppointments,
+      page: () => DoctorAppointmentScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.patientDetails,
+      page: () => PatientDetailsScreen(),
     ),
   ];
 }

@@ -1,14 +1,13 @@
 import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/controllers/doctor/home_page_controller.dart';
-import 'package:aetherwell/views/widgets/doctor/drawer.dart';
+import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../widgets/doctor/bottom_navigation.dart';
 import '../../widgets/doctor/daily_appointments_list_card.dart';
 import '../../widgets/doctor/daily_appointments_main_card.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
-  DoctorHomeScreen({Key? key}) : super(key: key);
+  const DoctorHomeScreen({Key? key}) : super(key: key);
 
   @override
   _DoctorHomeScreenState createState() => _DoctorHomeScreenState();
@@ -19,18 +18,18 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   final AuthController authController = Get.find<AuthController>();
   final DoctorHomeController doctorHomeController =
       Get.find<DoctorHomeController>();
-
-  // Dummy List Replace By original List
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome Doctor'),
+        title: const Text('Dashboard'),
         backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
             onPressed: () {
               authController.logout();
             },

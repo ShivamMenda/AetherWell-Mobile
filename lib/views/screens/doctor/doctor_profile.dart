@@ -1,8 +1,9 @@
 import 'package:aetherwell/controllers/doctor/profile_controller.dart';
+import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/doctor/drawer.dart';
+
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome Doctor'),
+        title: const Text('Profile'),
         backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
@@ -45,25 +46,24 @@ class _DoctorProfileState extends State<DoctorProfile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "Personal Information",
                   style: TextStyle(
                       color: Colors.blueGrey,
                       fontSize: 24,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg='), // Replace the URL with any image URL
+                    const CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/doctor_profile.jpeg"), // Replace the URL with any image URL
                       radius: 50,
                       backgroundColor: Colors.blueAccent,
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,24 +79,24 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 _buildTextFormField(
                     doctorProfileController.phone, "Phone", Icons.phone),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTextFormField(doctorProfileController.experience,
                     "About me", Icons.text_rotation_angledown_sharp),
-                SizedBox(height: 30),
-                Text(
+                const SizedBox(height: 30),
+                const Text(
                   "Professional Information",
                   style: TextStyle(
                       color: Colors.blueGrey,
                       fontSize: 24,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTextFormField(doctorProfileController.specialization,
                     "Specialization", Icons.category),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTextFormField(doctorProfileController.clinic,
                     "Clinic / Hospital", Icons.local_hospital),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTextFormField(doctorProfileController.experience,
                     "Experience (Years)", Icons.timer),
               ],
@@ -106,7 +106,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueAccent,
-        child: Icon(Icons.edit, color: Colors.white),
+        child: const Icon(Icons.edit, color: Colors.white),
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -125,12 +125,12 @@ class _DoctorProfileState extends State<DoctorProfile> {
     return TextFormField(
       readOnly: true,
       controller: controller,
-      style: TextStyle(color: Colors.white70, fontSize: 18),
+      style: const TextStyle(color: Colors.white70, fontSize: 18),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.white70, fontSize: 18),
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+        labelStyle: const TextStyle(color: Colors.white70, fontSize: 18),
+        enabledBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
         prefixIcon: Icon(icon, color: Colors.white70),
       ),
     );
@@ -142,7 +142,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Edit Your Profile Here",
             style: TextStyle(
                 color: Colors.blueGrey,
@@ -157,10 +157,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
               Icons.local_hospital),
           _buildTextField(doctorProfileController.experience,
               "Experience (Years)", Icons.timer),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           MaterialButton(
             onPressed: () {},
-            child: Text("Update Now"),
+            child: const Text("Update Now"),
             color: Colors.blueAccent,
             minWidth: MediaQuery.of(context).size.width,
           ),
@@ -176,13 +176,13 @@ class _DoctorProfileState extends State<DoctorProfile> {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),
-        labelStyle: TextStyle(color: Colors.white70),
+        labelStyle: const TextStyle(color: Colors.white70),
         enabledBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         focusedBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
       ),
-      style: TextStyle(color: Colors.white70),
+      style: const TextStyle(color: Colors.white70),
     );
   }
 }

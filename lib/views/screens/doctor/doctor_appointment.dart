@@ -1,18 +1,15 @@
-import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
-class UserHomeScreen extends StatelessWidget {
-  UserHomeScreen({super.key});
-  final AuthController authController = Get.find<AuthController>();
+class DoctorAppointmentScreen extends StatelessWidget {
+  const DoctorAppointmentScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text('Dashboard'),
-        backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
             icon: const Icon(
@@ -24,9 +21,13 @@ class UserHomeScreen extends StatelessWidget {
             },
           ),
         ],
+        title: Text('Doctor Appointment'),
       ),
-      body: const Center(
-        child: Text('Welcome to User Home Screen!'),
+      body: Center(
+        child: Text(
+          'Welcome to Doctor Appointment screen',
+          style: TextStyle(fontSize: 12.sp),
+        ),
       ),
     );
   }
