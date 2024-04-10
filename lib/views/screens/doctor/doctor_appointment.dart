@@ -1,6 +1,9 @@
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../routes/app_routes.dart';
 
 class DoctorAppointmentScreen extends StatelessWidget {
   const DoctorAppointmentScreen({super.key});
@@ -28,6 +31,13 @@ class DoctorAppointmentScreen extends StatelessWidget {
           'Welcome to Doctor Appointment screen',
           style: TextStyle(fontSize: 12.sp),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+        Get.toNamed(AppRoutes.doctorAvailbitiyManagement);
+        },
+        child: Icon(Icons.analytics,color: Colors.white70,),
+        backgroundColor: Colors.blueAccent,
       ),
     );
   }

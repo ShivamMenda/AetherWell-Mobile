@@ -10,4 +10,5 @@ class AppRoutes {
   static const patientDetails = "/doctor/patientDetails";
   static const doctorHome = "/doctor/home";
   static const doctorProfile = "/doctor/profile";
+  static const doctorAvailbitiyManagement = "/doctor/availbiltityManagement";
 }
