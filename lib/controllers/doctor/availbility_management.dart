@@ -18,24 +18,22 @@ class InflowData {
 }
 
 class DoctorAvailbilityController extends GetxController {
-  final appointmentsNumber="1925";
-  final patientNumber="153";
+  final appointmentsNumber = "1925";
+  final patientNumber = "153";
 
   List<PieChartData> piChartData = [
     PieChartData('Excellent', 45),
     PieChartData('Good', 30),
     PieChartData('Fair', 12),
   ];
-  List<InflowData>inflowData=[
-    InflowData("Monday",25.0),
-    InflowData("Tuesday",45.0),
-    InflowData("Wday",35.0),
-    InflowData("Thursday",15.0),
-    InflowData("Friday",55.0),
-    InflowData("Saturday",35.0),
-    InflowData("Sunday",15.0),
+  List<InflowData> inflowData = [
+    InflowData("Mon", 25.0),
+    InflowData("Tue", 45.0),
+    InflowData("Wed", 35.0),
+    InflowData("Thu", 15.0),
+    InflowData("Fri", 55.0),
   ];
-  void init(){
+  void init() {
     //TODO:Fetch from api
     // appointmentsNumber=1925;
     // patientNumber=153;
