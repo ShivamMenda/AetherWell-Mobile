@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

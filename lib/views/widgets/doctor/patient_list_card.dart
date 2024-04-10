@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class PatientRecordTile extends StatelessWidget {
   final String? patientId;
@@ -34,7 +36,8 @@ class PatientRecordTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.blueGrey.withOpacity(0.1), // Adjust opacity as needed
+              color:
+                  Colors.blueGrey.withOpacity(0.1), // Adjust opacity as needed
               spreadRadius: 1,
               blurRadius: 3,
               offset: Offset(-2, 0),
@@ -43,11 +46,11 @@ class PatientRecordTile extends StatelessWidget {
           border: Border(
             left: BorderSide(
               color: borderColor,
-              width: 3, // Increased border width
+              width: 1.5.w, // Increased border width
             ),
           ),
         ),
-        height: MediaQuery.of(context).size.height / 5,
+        height: Get.height / 4.2,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -61,27 +64,36 @@ class PatientRecordTile extends StatelessWidget {
                     radius: 30,
                     backgroundImage: NetworkImage(randomPhotoUrl),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 3.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Patient ID: $patientId", style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 5),
-                        Text("Patient Name: $patientName", style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 5),
-                        Text("Age: $age", style: TextStyle(color: textColor, fontWeight: FontWeight.bold)),
+                        Text("Patient ID: $patientId",
+                            style: TextStyle(
+                                color: textColor, fontWeight: FontWeight.bold)),
+                        SizedBox(height: 1.h),
+                        Text("Patient Name: $patientName",
+                            style: TextStyle(
+                                color: textColor, fontWeight: FontWeight.bold)),
+                        SizedBox(height: 1.h),
+                        Text("Age: $age",
+                            style: TextStyle(
+                                color: textColor, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 5),
-              Text("Contact Number: $contactNumber", style: TextStyle(color: textColor)),
-              SizedBox(height: 5),
-              Text("Past Appointments: $pastAppointments", style: TextStyle(color: textColor)),
-              SizedBox(height: 5),
-              Text("Next Appointment Date: $nextAppointmentDate", style: TextStyle(color: textColor)),
+              SizedBox(height: 1.h),
+              Text("Contact Number: $contactNumber",
+                  style: TextStyle(color: textColor)),
+              SizedBox(height: 0.7.h),
+              Text("Past Appointments: $pastAppointments",
+                  style: TextStyle(color: textColor)),
+              SizedBox(height: 0.7.h),
+              Text("Next Appointment Date: $nextAppointmentDate",
+                  style: TextStyle(color: textColor)),
             ],
           ),
         ),
@@ -89,5 +101,3 @@ class PatientRecordTile extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomCardWidget extends StatelessWidget {
   final IconData icon;
@@ -37,21 +38,21 @@ class CustomCardWidget extends StatelessWidget {
               color: iconColor,
               size: iconSize,
             ),
-            SizedBox(height: 16), // Increased height here
+            SizedBox(height: 2.h), // Increased height here
             Text(
               header,
               style: TextStyle(
                 color: headerColor,
-                fontSize: 22, // Increased font size here
+                fontSize: 15.sp, // Increased font size here
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8), // Increased height here
+            SizedBox(height: 1.h), // Increased height here
             Text(
               subheader,
               style: TextStyle(
                 color: subheaderColor,
-                fontSize: 18, // Increased font size here
+                fontSize: 16.sp, // Increased font size here
               ),
             ),
           ],
@@ -60,5 +61,3 @@ class CustomCardWidget extends StatelessWidget {
     );
   }
 }
-
-
