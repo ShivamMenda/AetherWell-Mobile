@@ -1,3 +1,4 @@
+import 'package:aetherwell/controllers/doctor/appointment.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,8 +6,15 @@ import 'package:sizer/sizer.dart';
 
 import '../../../routes/app_routes.dart';
 
-class DoctorAppointmentScreen extends StatelessWidget {
+class DoctorAppointmentScreen extends StatefulWidget {
   const DoctorAppointmentScreen({super.key});
+
+  @override
+  State<DoctorAppointmentScreen> createState() => _DoctorAppointmentScreenState();
+}
+
+class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
+  final doctorAppointmentController=Get.put(DoctorAppointmentController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +34,141 @@ class DoctorAppointmentScreen extends StatelessWidget {
         ],
         title: Text('Doctor Appointment'),
       ),
-      body: Center(
-        child: Text(
-          'Welcome to Doctor Appointment screen',
-          style: TextStyle(fontSize: 12.sp),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Text("Here Are All Your Appointments",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize:24),),
+              SizedBox(height: 10,),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: doctorAppointmentController.appointmentList.length,
+                  itemBuilder: (BuildContext context,int index){
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height / 5,
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15), // Add border radius
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          // First Column
+                          Container(
+                            decoration: BoxDecoration(borderRadius:BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(15)),color:Colors.blueAccent),
+
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.date_range_outlined, color: Colors.white70),
+                                SizedBox(height: 8),
+                                Text(
+                                  "20-04-2024",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Second Column
+                          Expanded(
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Patient Name",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    doctorAppointmentController.appointmentList[index]['patientName']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "Diagnosis",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    doctorAppointmentController.appointmentList[index]['diagnostics']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "Gender",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    doctorAppointmentController.appointmentList[index]['gender']!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Third Column depending on status
+                          Container(
+                            width: 50, // Fixed width for both containers
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(15),
+                              ),
+                              color: doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                                  ? Colors.green
+                                  : Colors.redAccent,
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center, // Align text to center horizontally
+                              children: [
+                                Icon(
+                                  doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                                      ? Icons.cloud_done
+                                      : Icons.delete,
+                                  color: Colors.white70,
+                                ),
+                                SizedBox(height: 8),
+                              ],
+                            ),
+                          ),
+
+
+
+                        ],
+                      ),
+                    ),
+                  );
+
+                  }),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
