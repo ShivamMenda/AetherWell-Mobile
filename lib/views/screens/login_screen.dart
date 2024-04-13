@@ -148,10 +148,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Sign In",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          authController.email.value = emailController.text;
+                          authController.password.value = passwordController.text;
+                        } else {
+                          return;
+                        }
                         authController.isUser.value == true
-                            ? authController.userLogin()
-                            : authController.doctorLogin(); // For testing
+                            ? await authController.userLogin()
+                            : await authController.doctorLogin(); // For testing
                         if (!authController.isUser.value) {
                           Get.offAndToNamed(AppRoutes.doctorHome);
                         } else {
