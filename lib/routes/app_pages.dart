@@ -7,6 +7,7 @@ import 'package:aetherwell/bindings/user/user_appointment_binding.dart';
 import 'package:aetherwell/bindings/user/user_home_binding.dart';
 import 'package:aetherwell/bindings/user/user_profile_binding.dart';
 import 'package:aetherwell/bindings/user/user_recommendation_bindings.dart';
+import 'package:aetherwell/controllers/user/user_appointmentbooking_controller.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_appointment.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_availbiltity_management.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_profile.dart';
@@ -90,7 +91,9 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.appointmentBooking,
-      page: () => AppointmentBookingScreen(doctor: null,),
+      page: () => AppointmentBookingScreen(
+        doctor: null,
+      ),
     ),
   ];
 }

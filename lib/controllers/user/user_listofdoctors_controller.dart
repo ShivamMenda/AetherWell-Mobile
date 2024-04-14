@@ -1,68 +1,45 @@
+import 'dart:convert';
+
+import 'package:aetherwell/utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/doctor.dart';
 
 class ListOfDoctorsController extends GetxController {
-  List<Doctor> DoctorsList = [
-    Doctor(
-      username: 'john_doe',
-      email: 'john_doe@example.com',
-      role: DoctorRole.doctor,
-      name: 'John Doe',
-      age: 35,
-      specialization: 'Cardiology',
-      hospital: 'General Hospital',
-      availability: [],
-    ),
-    Doctor(
-      username: 'jane_smith',
-      email: 'jane_smith@example.com',
-      role: DoctorRole.doctor,
-      name: 'Jane Smith',
-      age: 42,
-      specialization: 'Neurology',
-      hospital: 'City Hospital',
-      availability: [],
-    ),
-    Doctor(
-      username: 'david_johnson',
-      email: 'david_johnson@example.com',
-      role:DoctorRole.doctor,
-      name: 'David Johnson',
-      age: 40,
-      specialization: 'Dermatology',
-      hospital: 'Metro Hospital',
-      availability: [],
-    ),
-    Doctor(
-      username: 'emily_brown',
-      email: 'emily_brown@example.com',
-      role: DoctorRole.doctor,
-      name: 'Emily Brown',
-      age: 38,
-      specialization: 'Pediatrics',
-      hospital: 'Children\'s Hospital',
-      availability: [],
-    ),
-    Doctor(
-      username: 'emily_brown',
-      email: 'emily_brown@example.com',
-      role: DoctorRole.doctor,
-      name: 'Emily Brown',
-      age: 38,
-      specialization: 'Pediatrics',
-      hospital: 'Children\'s Hospital',
-      availability: [],
-    ),
-    Doctor(
-      username: 'john_doe',
-      email: 'john_doe@example.com',
-      role: DoctorRole.doctor,
-      name: 'John Doe',
-      age: 35,
-      specialization: 'Cardiology',
-      hospital: 'General Hospital',
-      availability: [],
-    ),
-  ];
+  late RxList<Doctor> doctorsList;
+  RxBool isLoading = false.obs;
+
+  @override
+  void onInit() async {
+    doctorsList = <Doctor>[].obs;
+    await getDoctors();
+    super.onInit();
+  }
+
+  Future getDoctors() async {
+    isLoading.value = true;
+    final docList = <Doctor>[];
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final header = <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token'
+    };
+
+    final url = Uri.parse('$kNodeApiUrl/api/v1/users/getAllDoctors');
+    final response = await http.get(url, headers: header);
+    final responseData =
+        (jsonDecode(response.body) as Map<String, dynamic>)['doctors'] as List;
+    for (final doctor in responseData) {
+      docList.add(
+        Doctor.fromJson(
+            doctor as Map<String, dynamic>, doctor['_id'] as String),
+      );
+    }
+    doctorsList.value = docList;
+    isLoading.value = false;
+  }
 }

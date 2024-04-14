@@ -2,6 +2,7 @@ import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/controllers/user/home_controller.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:aetherwell/views/widgets/user/user_record_tile.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -54,23 +55,23 @@ class UserHomeScreen extends StatelessWidget {
               SizedBox(height: 5.h),
               ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: userHomeController.appointmentList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final dateTitle =
-                      userHomeController.appointmentList[index]['date'];
-                  final diseaseName =
-                      userHomeController.appointmentList[index]['diseaseName'];
+                  final dateTitle = DateFormat.yMMMd().format(
+                    userHomeController.appointmentList[index].date,
+                  );
+                  final startTime =
+                      userHomeController.appointmentList[index].startTime;
                   final doctorName =
-                      userHomeController.appointmentList[index]['doctorName'];
-                  final hospitalName =
-                      userHomeController.appointmentList[index]['hospitalName'];
+                      userHomeController.appointmentList[index].doctorId.oid;
 
                   return UserRecordTile(
                     dateTitle: dateTitle,
-                    diseaseName: diseaseName,
+                    status:
+                        userHomeController.appointmentList[index].status.name,
                     doctorName: doctorName,
-                    hospitalName: hospitalName,
+                    startTime: startTime,
                     onViewDetails: () {},
                   );
                 },

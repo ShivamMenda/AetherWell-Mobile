@@ -1,36 +1,36 @@
+import 'package:aetherwell/models/appointments.dart';
 import 'package:get/get.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class UserHomeController extends GetxController {
-  List<Map<String, String>> appointmentList = [ // Get only today's appointments from API by date
-    {
-      'date': '18-04-2023',
-      'diseaseName': 'Fever',
-      'doctorName': 'John Doe',
-      'hospitalName': 'XYZ Hospital',
-    },
-    {
-      'date': '19-04-2023',
-      'diseaseName': 'Headache',
-      'doctorName': 'Jane Smith',
-      'hospitalName': 'ABC Hospital',
-    },
-    {
-      'date': '20-04-2023',
-      'diseaseName': 'Sore throat',
-      'doctorName': 'David Johnson',
-      'hospitalName': 'PQR Hospital',
-    },
-    {
-      'date': '21-04-2023',
-      'diseaseName': 'Cough',
-      'doctorName': 'Emily Brown',
-      'hospitalName': 'LMN Hospital',
-    },
-    {
-      'date': '22-04-2023',
-      'diseaseName': 'Fatigue',
-      'doctorName': 'Michael Williams',
-      'hospitalName': 'OPQ Hospital',
-    }
+  List<Appointment> appointmentList = [
+    // Get only today's appointments from API by date
+    Appointment(
+      id: ObjectId(),
+      doctorId: ObjectId(),
+      userId: ObjectId(),
+      date: DateTime.now(),
+      startTime: '10:00 AM',
+      endTime: '11:00 AM',
+      status: Status.confirmed,
+    ),
+    Appointment(
+      id: ObjectId(),
+      doctorId: ObjectId(),
+      userId: ObjectId(),
+      date: DateTime.now(),
+      startTime: '11:00 AM',
+      endTime: '12:00 PM',
+      status: Status.pending,
+    ),
+    Appointment(
+      id: ObjectId(),
+      doctorId: ObjectId(),
+      userId: ObjectId(),
+      date: DateTime.now(),
+      startTime: '12:00 PM',
+      endTime: '1:00 PM',
+      status: Status.attended,
+    ),
   ];
 }

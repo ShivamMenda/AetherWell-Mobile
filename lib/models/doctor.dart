@@ -75,7 +75,7 @@ class Doctor {
   String? gender;
   String? address;
   String? phone;
-  ObjectId? id;
+  ObjectId id;
   late List<DayAvailabilitySchema> availability;
 
   Doctor({
@@ -90,7 +90,7 @@ class Doctor {
     this.gender,
     this.address,
     this.phone,
-    this.id,
+    required this.id,
     required this.availability,
   });
 
@@ -102,7 +102,7 @@ class Doctor {
       //password:"",
       role: json['role'] == "doctor" ? DoctorRole.doctor : DoctorRole.user,
       age: json['age'] as int,
-      gender: json['gender'] as String,
+      gender: json['gender'] as String? ?? "Male",
       specialization: json['specialization'] as String,
       hospital: json['hospital'] as String,
       address: json['address'] as String?,

@@ -5,17 +5,17 @@ import 'package:sizer/sizer.dart';
 class UserRecordTile extends StatefulWidget {
   final String? dateTitle;
   final String? doctorName;
-  final String? hospitalName;
-  final String? diseaseName;
-  final VoidCallback onViewDetails;
-  UserRecordTile(
-      {Key? key,
-      required this.dateTitle,
-      required this.diseaseName,
-      required this.doctorName,
-      required this.hospitalName,
-      required this.onViewDetails})
-      : super(key: key);
+  final String? status;
+  final String? startTime;
+  final void Function() onViewDetails;
+  UserRecordTile({
+    Key? key,
+    required this.dateTitle,
+    required this.startTime,
+    required this.doctorName,
+    required this.status,
+    required this.onViewDetails,
+  }) : super(key: key);
 
   @override
   State<UserRecordTile> createState() => _UserRecordTileState();
@@ -34,8 +34,8 @@ class _UserRecordTileState extends State<UserRecordTile> {
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color:
-                    Colors.black, // Adjust the shadow color and opacity as needed
+                color: Colors
+                    .black, // Adjust the shadow color and opacity as needed
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset:
@@ -70,7 +70,7 @@ class _UserRecordTileState extends State<UserRecordTile> {
                     ],
                   ),
                   Text(
-                    widget.diseaseName ?? "",
+                    widget.startTime ?? "",
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 ],
@@ -105,7 +105,7 @@ class _UserRecordTileState extends State<UserRecordTile> {
                   SizedBox(
                     width: 5,
                   ),
-                  Text(widget.hospitalName ?? ""),
+                  Text(widget.status ?? ""),
                 ],
               ),
             ]),

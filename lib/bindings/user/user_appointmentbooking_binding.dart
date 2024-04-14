@@ -3,10 +3,11 @@ import 'package:aetherwell/controllers/user/user_appointmentbooking_controller.d
 import 'package:get/get.dart';
 import 'package:aetherwell/controllers/auth_controller.dart';
 
-class UserHomeBinding extends Bindings {
+class UserAppointmentBookingBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<AuthController>(AuthController(), permanent: true);
-    Get.put<UserAppointmentBookingController>(UserAppointmentBookingController());
+    Get.put<UserAppointmentBookingController>(
+        UserAppointmentBookingController());
   }
 }

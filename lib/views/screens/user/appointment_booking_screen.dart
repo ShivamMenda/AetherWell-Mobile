@@ -41,9 +41,10 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
               const Text(
                 "Choose any Day",
                 style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white70,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -99,15 +100,15 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                         borderRadius:
                             BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: TextStyle(
+                      dayNumStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
-                      dayStrStyle: TextStyle(
+                      dayStrStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
-                      monthStrStyle: TextStyle(
+                      monthStrStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
@@ -118,15 +119,15 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                         borderRadius:
                             BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: TextStyle(
+                      dayNumStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
-                      dayStrStyle: TextStyle(
+                      dayStrStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
-                      monthStrStyle: TextStyle(
+                      monthStrStyle: const TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
@@ -165,13 +166,13 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                     selectedColor: Colors.blueAccent,
                     initialSelection:
                         userAppointmentBookingController.selectedIndex,
-                    radioButtonValue: (name, index) {
+                    radioButtonValue: (val, index) {
                       setState(() {
                         userAppointmentBookingController.selectedIndex = index;
-                        userAppointmentBookingController.selectedSlot = name;
+                        userAppointmentBookingController.selectedSlot = val;
                       });
                     },
-                    buttonLables: [
+                    buttonLables: const [
                       "7:00 AM",
                       "8:00 AM",
                       "9:00 AM",
@@ -183,7 +184,17 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                       "8:00 PM"
                     ],
                     //Index value done here get the list and do index -1
-                    buttonValues: [7, 8, 9, 10, 11, 17, 18, 19, 20],
+                    buttonValues: const [
+                      "7:00 AM",
+                      "8:00 AM",
+                      "9:00 AM",
+                      "10:00 AM",
+                      "11:00 AM",
+                      "5:00 PM",
+                      "6:00 PM",
+                      "7:00 PM",
+                      "8:00 PM"
+                    ],
                     buttonColor: Colors.blueGrey,
                     fontSize: 16,
                     textColor: Colors.white70,
@@ -215,8 +226,10 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 widthFactor: 0.8, // Adjust the width factor as needed
                 child: ElevatedButton(
                   onPressed: () {
-                    print(userAppointmentBookingController.focusDate);
-                    print(userAppointmentBookingController.selectedSlot - 1);
+                    //convert to 24hr format
+                    userAppointmentBookingController.bookAppointment(
+                      widget.doctor!,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
