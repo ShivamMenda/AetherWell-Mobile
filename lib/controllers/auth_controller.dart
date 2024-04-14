@@ -49,6 +49,7 @@ class AuthController extends GetxController {
           await getUser();
           Get.offAllNamed(AppRoutes.userHome);
         } else {
+          await getDoctor();
           Get.offAllNamed(AppRoutes.doctorHome);
         }
       } else {
@@ -112,6 +113,7 @@ class AuthController extends GetxController {
   }
 
   Future doctorLogin() async {
+    isLoading.value = true;
     final prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$kNodeApiUrl/api/v1/auth/doctors/login');
     final body = jsonEncode({
@@ -135,6 +137,7 @@ class AuthController extends GetxController {
         "Invalid email or password",
         snackPosition: SnackPosition.BOTTOM,
       );
+      isLoading.value = false;
       // Get.offAllNamed(AppRoutes.login);
       return;
     }
@@ -144,6 +147,10 @@ class AuthController extends GetxController {
     prefs.setString('token', token);
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', false);
+    final id =
+        ((jsonDecode(response.body) as Map<String, dynamic>)['id'] as String);
+    prefs.setString('id', id);
+    await getDoctor();
     Get.snackbar(
       'Success',
       'Doctor logged in',
@@ -151,6 +158,7 @@ class AuthController extends GetxController {
       backgroundColor: Color(Colors.green.value),
       colorText: Color(Colors.white.value),
     );
+    isLoading.value = false;
     Get.offAndToNamed(AppRoutes.doctorHome);
   }
 
@@ -219,15 +227,17 @@ class AuthController extends GetxController {
       return;
     }
     final data = jsonDecode(response.body) as Map<String, dynamic>;
+
+    data['profile']['availability'] = [];
     doctor = Doctor.fromJson(data['profile'] as Map<String, dynamic>, id!);
     Get.snackbar(
       'Success',
       'Doctor data fetched',
       snackPosition: SnackPosition.BOTTOM,
     );
-    log(user.name);
-    log(user.email);
-    log(user.id.toString());
+    log(doctor.name);
+    log(doctor.email);
+    log(doctor.id.toString());
   }
 
   Future logout() async {

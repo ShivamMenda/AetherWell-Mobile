@@ -72,7 +72,7 @@ class Doctor {
   late int age;
   late String specialization;
   late String hospital;
-  // String? gender;
+  String? gender;
   String? address;
   String? phone;
   ObjectId? id;
@@ -87,7 +87,7 @@ class Doctor {
     required this.age,
     required this.specialization,
     required this.hospital,
-    //this.gender,
+    this.gender,
     this.address,
     this.phone,
     this.id,
@@ -96,14 +96,14 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json, String id) {
     return Doctor(
+      name: json['name'] as String,
+      email: json['email'] as String,
       username: json['username'] as String,
       //password:"",
-      email: json['email'] as String,
       role: json['role'] == "doctor" ? DoctorRole.doctor : DoctorRole.user,
-      name: json['name'] as String,
       age: json['age'] as int,
+      gender: json['gender'] as String,
       specialization: json['specialization'] as String,
-      //gender:json['gender'] as String,
       hospital: json['hospital'] as String,
       address: json['address'] as String?,
       phone: json['phone'] as String?,
