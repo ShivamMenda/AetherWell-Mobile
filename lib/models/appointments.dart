@@ -50,7 +50,7 @@ class Appointment {
       id: ObjectId.parse(json['_id'] as String),
       doctorId: ObjectId.parse(json['doctorId'] as String),
       userId: ObjectId.parse(json['userId'] as String),
-      date: DateTime(json['date']),
+      date: DateTime.parse(json['date']),
       startTime: json['startTime'],
       endTime: json['endTime'],
       status: getStatus(json['status']),

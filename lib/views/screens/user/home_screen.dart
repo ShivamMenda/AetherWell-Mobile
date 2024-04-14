@@ -53,29 +53,37 @@ class UserHomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 5.h),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: userHomeController.appointmentList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final dateTitle = DateFormat.yMMMd().format(
-                    userHomeController.appointmentList[index].date,
-                  );
-                  final startTime =
-                      userHomeController.appointmentList[index].startTime;
-                  final doctorName =
-                      userHomeController.appointmentList[index].doctorId.oid;
+              Obx(() => userHomeController.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : userHomeController.appointmentList.isEmpty
+                      ? const Center(
+                          child: Text('No appointments found'),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: userHomeController.appointmentList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final dateTitle = DateFormat.yMMMd().format(
+                              userHomeController.appointmentList[index].date,
+                            );
+                            final startTime = userHomeController
+                                .appointmentList[index].startTime;
+                            final doctorName = userHomeController
+                                .appointmentList[index].doctorName;
 
-                  return UserRecordTile(
-                    dateTitle: dateTitle,
-                    status:
-                        userHomeController.appointmentList[index].status.name,
-                    doctorName: doctorName,
-                    startTime: startTime,
-                    onViewDetails: () {},
-                  );
-                },
-              ),
+                            return UserRecordTile(
+                              dateTitle: dateTitle,
+                              status: userHomeController
+                                  .appointmentList[index].status.name,
+                              doctorName: doctorName,
+                              startTime: startTime,
+                              onViewDetails: () {},
+                            );
+                          },
+                        )),
             ],
           ),
         ),
