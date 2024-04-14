@@ -6,6 +6,8 @@ class AppRoutes {
   static const userProfile = "/user/profile";
   static const userRecommendation = "/user/recommendation";
   static const userAppointments = "/user/appointments";
+  static const listOfDoctors = "/user/listOfDoctors";
+  static const appointmentBooking = "/user/appointmentBooking";
   static const doctorAppointments = "/doctor/appointments";
   static const patientDetails = "/doctor/patientDetails";
   static const doctorHome = "/doctor/home";

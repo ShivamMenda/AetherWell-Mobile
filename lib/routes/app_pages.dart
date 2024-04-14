@@ -3,6 +3,7 @@ import 'package:aetherwell/bindings/doctor/doctor_profile_binding.dart';
 import 'package:aetherwell/bindings/login_binding.dart';
 import 'package:aetherwell/bindings/signup_binding.dart';
 import 'package:aetherwell/bindings/splash_binding.dart';
+import 'package:aetherwell/bindings/user/user_appointment_binding.dart';
 import 'package:aetherwell/bindings/user/user_home_binding.dart';
 import 'package:aetherwell/bindings/user/user_profile_binding.dart';
 import 'package:aetherwell/bindings/user/user_recommendation_bindings.dart';
@@ -13,6 +14,8 @@ import 'package:aetherwell/views/screens/doctor/home_screen.dart';
 import 'package:aetherwell/views/screens/doctor/patient_details.dart';
 import 'package:aetherwell/views/screens/login_screen.dart';
 import 'package:aetherwell/views/screens/signup_screen.dart';
+import 'package:aetherwell/views/screens/user/appointment_booking_screen.dart';
+import 'package:aetherwell/views/screens/user/list_of_doctors.dart';
 import 'package:aetherwell/views/screens/user/profile_screen.dart';
 import 'package:aetherwell/views/screens/user/user_appointments.dart';
 import 'package:aetherwell/views/screens/user/user_recommendation_screen.dart';
@@ -66,6 +69,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.userAppointments,
       page: () => UserAppointmentScreen(),
+      binding: UserAppointmentsBinding(),
     ),
     GetPage(
       name: AppRoutes.doctorAppointments,
@@ -78,6 +82,14 @@ class AppPages {
     GetPage(
       name: AppRoutes.doctorAvailbitiyManagement,
       page: () => DoctorAvailbilityManagement(),
+    ),
+    GetPage(
+      name: AppRoutes.listOfDoctors,
+      page: () => ListOfDoctorsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.appointmentBooking,
+      page: () => AppointmentBookingScreen(),
     ),
   ];
 }

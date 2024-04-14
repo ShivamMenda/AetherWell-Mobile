@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:aetherwell/models/user.dart';
 import 'package:aetherwell/utils/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:aetherwell/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,7 @@ class AuthController extends GetxController {
     try {
       if (await getLoginState() == true) {
         if (isUser.value == true) {
+          await getUser();
           Get.offAllNamed(AppRoutes.userHome);
         } else {
           Get.offAllNamed(AppRoutes.doctorHome);
@@ -97,6 +99,13 @@ class AuthController extends GetxController {
     prefs.setBool('isUser', true);
     await getUser();
     isLoading.value = false;
+    Get.snackbar(
+      'Success',
+      'User logged in',
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: Color(Colors.green.value),
+      colorText: Color(Colors.white.value),
+    );
     Get.offAllNamed(AppRoutes.userHome);
   }
 
@@ -133,6 +142,13 @@ class AuthController extends GetxController {
     prefs.setString('token', token);
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', false);
+    Get.snackbar(
+      'Success',
+      'Doctor logged in',
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: Color(Colors.green.value),
+      colorText: Color(Colors.white.value),
+    );
     Get.offAndToNamed(AppRoutes.doctorHome);
   }
 

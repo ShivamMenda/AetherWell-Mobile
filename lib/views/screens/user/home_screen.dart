@@ -37,7 +37,7 @@ class UserHomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Welcome, User!',
+                'Welcome, ${authController.user.name}!',
                 style: TextStyle(fontSize: 20.sp),
                 textAlign: TextAlign.center,
               ),
