@@ -75,6 +75,7 @@ class Doctor {
   late int age;
   late String specialization;
   late String hospital;
+  String? gender;
   String? address;
   String? phone;
   ObjectId? id;
@@ -89,6 +90,7 @@ class Doctor {
     required this.age,
     required this.specialization,
     required this.hospital,
+    this.gender,
     this.address,
     this.phone,
     this.id,
@@ -104,6 +106,7 @@ class Doctor {
       name: json['name'] as String,
       age:json['age'] as int,
       specialization: json['specialization'] as String,
+      gender:json['gender'] as String,
       hospital: json['hospital'] as String,
       address: json['address'] as String?,
       phone: json['phone'] as String?,
@@ -123,6 +126,7 @@ class Doctor {
       'specialization': specialization,
       'hospital': hospital,
       'address': address,
+      'gender':gender,
       'phone': phone,
       'availability': availability.map((dayAvailability) => dayAvailability.toJson()).toList(),
     };
