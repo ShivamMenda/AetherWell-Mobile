@@ -8,60 +8,108 @@ import 'package:radio_grouped_buttons/radio_grouped_buttons.dart';
 
 class AppointmentBookingScreen extends StatefulWidget {
   late Doctor? doctor;
-  AppointmentBookingScreen({Key? key,required this.doctor}) : super(key: key);
+  AppointmentBookingScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
-  State<AppointmentBookingScreen> createState() => _AppointmentBookingScreenState();
+  State<AppointmentBookingScreen> createState() =>
+      _AppointmentBookingScreenState();
 }
 
 class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
-  final userAppointmentBookingController=Get.put(UserAppointmentBookingController());
+  final userAppointmentBookingController =
+      Get.put(UserAppointmentBookingController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      backgroundColor: Colors.blueAccent,
-      title: Text("Choose Day and Slot",style: TextStyle(color: Colors.white),),
-      centerTitle: true,
-    ),
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: const Text(
+          "Choose Day and Slot",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 10,),
-              Text("Choose any Day",style: TextStyle(color: Colors.white70,fontSize: 24,fontWeight: FontWeight.bold),),
-              SizedBox(height: 20,),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Choose any Day",
+                style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               EasyInfiniteDateTimeLine(
                   showTimelineHeader: false,
                   dayProps: EasyDayProps(
                     activeDayStyle: DayStyle(
                       decoration: BoxDecoration(
                         color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16),
-                      dayStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
-                      monthStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
+                      dayNumStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      dayStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      monthStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
                     inactiveDayStyle: DayStyle(
                       decoration: BoxDecoration(
                         color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16),
-                      dayStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
-                      monthStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
+                      dayNumStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      dayStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      monthStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
                     todayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: userAppointmentBookingController.startTime == userAppointmentBookingController.focusDate ? Colors.blueAccent : Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(8.0), // Set border radius
+                        color: userAppointmentBookingController.startTime ==
+                                userAppointmentBookingController.focusDate
+                            ? Colors.blueAccent
+                            : Colors.blueGrey,
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16),
-                      dayStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
-                      monthStrStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14),
+                      dayNumStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      dayStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      monthStrStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
                   ),
                   controller: userAppointmentBookingController.controller,
@@ -71,13 +119,22 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   onDateChange: (selectedDate) {
                     setState(() {
                       userAppointmentBookingController.changeDate(selectedDate);
-                      userAppointmentBookingController.selectedIndex=0;
+                      userAppointmentBookingController.selectedIndex = 0;
                     });
-                  }
+                  }),
+              const SizedBox(
+                height: 30,
               ),
-              SizedBox(height: 30,),
-              Text("Available Slots",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 24),),
-              SizedBox(height: 20,),
+              const Text(
+                "Available Slots",
+                style: TextStyle(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Center(
@@ -86,16 +143,34 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                     buttonWidth: 110,
                     buttonHeight: 50,
                     selectedColor: Colors.blueAccent,
-                    initialSelection: userAppointmentBookingController.selectedIndex,
-                    radioButtonValue: (name,index){
+                    initialSelection:
+                        userAppointmentBookingController.selectedIndex,
+                    radioButtonValue: (name, index) {
                       setState(() {
-                        userAppointmentBookingController.selectedIndex=index;
+                        userAppointmentBookingController.selectedIndex = index;
                       });
-                    },buttonLables: ["7:00 AM","8:00 AM","9:00 AM","10:00 AM","11:00 AM",
-                    "5:00 PM","6:00 PM","7:00 PM","8:00 PM"
-                  ],
-                    buttonValues: ["7:00 AM","8:00 AM","9:00 AM","10:00 AM","11:00 AM",
-                      "5:00 PM","6:00 PM","7:00 PM","8:00 PM"
+                    },
+                    buttonLables: const [
+                      "7:00 AM",
+                      "8:00 AM",
+                      "9:00 AM",
+                      "10:00 AM",
+                      "11:00 AM",
+                      "5:00 PM",
+                      "6:00 PM",
+                      "7:00 PM",
+                      "8:00 PM"
+                    ],
+                    buttonValues: const [
+                      "7:00 AM",
+                      "8:00 AM",
+                      "9:00 AM",
+                      "10:00 AM",
+                      "11:00 AM",
+                      "5:00 PM",
+                      "6:00 PM",
+                      "7:00 PM",
+                      "8:00 PM"
                     ],
                     buttonColor: Colors.blueGrey,
                     fontSize: 16,
@@ -103,31 +178,39 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Note by Clicking Confim you are aggreing to our T&C.Appointment Cancellation may be subjected to Doctor Availbility.",
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Note by Clicking Confim you are aggreing to our T&C.Appointment Cancellation may be subjected to Doctor Availbility.",
                 ),
               ),
-              SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Note The Slot and the day you choose is final and cannot be changed.",
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Note The Slot and the day you choose is final and cannot be changed.",
                 ),
               ),
-              SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               FractionallySizedBox(
                 widthFactor: 0.8, // Adjust the width factor as needed
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent,
-                    padding: EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Confirm Appointment",
                     style: TextStyle(
                       color: Colors.white,
@@ -159,7 +242,6 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
               //     ),
               //   ),
               // ),
-
             ],
           ),
         ),
@@ -167,4 +249,3 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     );
   }
 }
-

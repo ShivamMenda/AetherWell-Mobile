@@ -48,10 +48,10 @@ class User {
     UserRole role = json['role'] == 'doctor' ? UserRole.doctor : UserRole.user;
     return User(
       name: json['name'],
+      username: json['username'],
       email: json['email'],
       //Password will not be reutrned just for modelling and sending JSON we have the field.
       //password: "",
-      username: json['username'],
       role: role,
       age: json['age'] as int,
       gender: json['gender'],

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:aetherwell/models/doctor.dart';
 import 'package:aetherwell/models/user.dart';
 import 'package:aetherwell/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class AuthController extends GetxController {
   final RxString email = ''.obs;
   final RxString password = ''.obs;
   late User user;
+  late Doctor doctor;
 
   @override
   void onInit() async {
@@ -191,6 +193,36 @@ class AuthController extends GetxController {
     Get.snackbar(
       'Success',
       'User data fetched',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+    log(user.name);
+    log(user.email);
+    log(user.id.toString());
+  }
+
+  Future getDoctor() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final id = prefs.getString('id');
+    final url = Uri.parse('$kNodeApiUrl/api/v1/doctors/profile/$id');
+    final header = <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+    final response = await http.get(
+      url,
+      headers: header,
+    );
+    log('Response status: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      log('Response body: ${response.body}');
+      return;
+    }
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    doctor = Doctor.fromJson(data['profile'] as Map<String, dynamic>, id!);
+    Get.snackbar(
+      'Success',
+      'Doctor data fetched',
       snackPosition: SnackPosition.BOTTOM,
     );
     log(user.name);

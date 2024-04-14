@@ -94,7 +94,7 @@ class Doctor {
     required this.availability,
   });
 
-  factory Doctor.fromJson(Map<String, dynamic> json) {
+  factory Doctor.fromJson(Map<String, dynamic> json, String id) {
     return Doctor(
       username: json['username'] as String,
       //password:"",
@@ -107,7 +107,7 @@ class Doctor {
       hospital: json['hospital'] as String,
       address: json['address'] as String?,
       phone: json['phone'] as String?,
-      id: json['id'] != null ? ObjectId.parse(json['id'] as String) : null,
+      id: ObjectId.parse(id),
       availability: (json['availability'] as List)
           .map((dayJson) => DayAvailabilitySchema.fromJson(dayJson))
           .toList(),
