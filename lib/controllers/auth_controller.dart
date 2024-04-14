@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:aetherwell/models/user.dart';
+import 'package:aetherwell/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:aetherwell/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -56,8 +57,7 @@ class AuthController extends GetxController {
 
   Future userLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse(
-        'https://aetherwell-node.onrender.com/api/v1/auth/users/login');
+    final url = Uri.parse('$kNodeApiUrl/api/v1/auth/users/login');
     final body = jsonEncode({
       'email': email.value,
       'password': password.value,
@@ -81,16 +81,16 @@ class AuthController extends GetxController {
     prefs.setString('token', token);
     final id =
         ((jsonDecode(response.body) as Map<String, dynamic>)['id'] as String);
-    await getUser();
+
     prefs.setString('id', id);
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', true);
+    await getUser();
   }
 
   Future doctorLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse(
-        'https://aetherwell-node.onrender.com/api/v1/auth/doctors/login');
+    final url = Uri.parse('$kNodeApiUrl/api/v1/auth/doctors/login');
     final body = jsonEncode({
       'email': email.value,
       'password': password.value,
@@ -140,8 +140,7 @@ class AuthController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final id = prefs.getString('id');
-    final url = Uri.parse(
-        'https://aetherwell-node.onrender.com/api/v1/users/profile/${id}');
+    final url = Uri.parse('$kNodeApiUrl/api/v1/users/profile/$id');
     final header = <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
