@@ -49,6 +49,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 height: 20,
               ),
               EasyInfiniteDateTimeLine(
+                  disabledDates: userAppointmentBookingController.disabledTime,
                   showTimelineHeader: false,
                   dayProps: EasyDayProps(
                     activeDayStyle: DayStyle(
@@ -98,15 +99,34 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                         borderRadius:
                             BorderRadius.circular(8.0), // Set border radius
                       ),
-                      dayNumStyle: const TextStyle(
+                      dayNumStyle: TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
-                      dayStrStyle: const TextStyle(
+                      dayStrStyle: TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
-                      monthStrStyle: const TextStyle(
+                      monthStrStyle: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                    disabledDayStyle: DayStyle(
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius:
+                            BorderRadius.circular(8.0), // Set border radius
+                      ),
+                      dayNumStyle: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      dayStrStyle: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      monthStrStyle: TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
@@ -148,9 +168,10 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                     radioButtonValue: (name, index) {
                       setState(() {
                         userAppointmentBookingController.selectedIndex = index;
+                        userAppointmentBookingController.selectedSlot = name;
                       });
                     },
-                    buttonLables: const [
+                    buttonLables: [
                       "7:00 AM",
                       "8:00 AM",
                       "9:00 AM",
@@ -161,17 +182,8 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                       "7:00 PM",
                       "8:00 PM"
                     ],
-                    buttonValues: const [
-                      "7:00 AM",
-                      "8:00 AM",
-                      "9:00 AM",
-                      "10:00 AM",
-                      "11:00 AM",
-                      "5:00 PM",
-                      "6:00 PM",
-                      "7:00 PM",
-                      "8:00 PM"
-                    ],
+                    //Index value done here get the list and do index -1
+                    buttonValues: [7, 8, 9, 10, 11, 17, 18, 19, 20],
                     buttonColor: Colors.blueGrey,
                     fontSize: 16,
                     textColor: Colors.white70,
@@ -202,7 +214,10 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
               FractionallySizedBox(
                 widthFactor: 0.8, // Adjust the width factor as needed
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(userAppointmentBookingController.focusDate);
+                    print(userAppointmentBookingController.selectedSlot - 1);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(vertical: 14),
