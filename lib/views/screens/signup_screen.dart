@@ -20,6 +20,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController specaddressController = TextEditingController();
   final TextEditingController hospPhoneController = TextEditingController();
+  //Added Gender
+  final TextEditingController genderController = TextEditingController();
+
+
 
   final AuthController authController = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
@@ -198,6 +202,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (val) {
                       if (val!.length > 3 || !val.contains(RegExp(r'[0-9]'))) {
                         return "Enter Valid Age";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  TextFormField(
+                    controller: genderController,
+                    decoration: InputDecoration(
+                        labelText: "Gender",
+                        labelStyle: const TextStyle(color: Colors.white),
+                        hintStyle: const TextStyle(color: Colors.white),
+                        disabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.white),
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                              width: 1,
+                            )),
+                        prefixIcon: Icon(
+                          Icons.male,
+                          color: Theme.of(context).primaryColor,
+                        )),
+                    validator: (val) {
+                      bool isValidGender(String gender) {
+                        return RegExp(r'^(male|female|other|transgender)$').hasMatch(gender);
+                      }
+
+                      if (isValidGender(val!)) {
+                        return "Enter Valid Gender";
                       } else {
                         return null;
                       }
