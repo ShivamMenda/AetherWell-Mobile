@@ -151,18 +151,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           authController.email.value = emailController.text;
-                          authController.password.value = passwordController.text;
+                          authController.password.value =
+                              passwordController.text;
                         } else {
                           return;
                         }
                         authController.isUser.value == true
                             ? await authController.userLogin()
-                            : await authController.doctorLogin(); // For testing
-                        if (!authController.isUser.value) {
-                          Get.offAndToNamed(AppRoutes.doctorHome);
-                        } else {
-                          Get.offAndToNamed(AppRoutes.userHome);
-                        }
+                            : await authController.doctorLogin();
                       },
                     ),
                   ),

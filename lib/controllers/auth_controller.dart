@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
+  final isLoading = false.obs;
   final RxBool isLoggedIn = false.obs;
   final RxBool isUser = true.obs;
   final RxString email = ''.obs;
@@ -56,6 +57,7 @@ class AuthController extends GetxController {
   }
 
   Future userLogin() async {
+    isLoading.value = true;
     final prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$kNodeApiUrl/api/v1/auth/users/login');
     final body = jsonEncode({
@@ -73,6 +75,14 @@ class AuthController extends GetxController {
 
     if (response.statusCode != 200) {
       log('Response body: ${response.body}');
+      prefs.setBool('isLoggedIn', false);
+      prefs.setBool('isUser', true);
+      isLoading.value = false;
+      Get.snackbar(
+        "Fail",
+        "Invalid email or password",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
     final token =
@@ -86,6 +96,8 @@ class AuthController extends GetxController {
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', true);
     await getUser();
+    isLoading.value = false;
+    Get.offAllNamed(AppRoutes.userHome);
   }
 
   Future doctorLogin() async {
@@ -105,11 +117,14 @@ class AuthController extends GetxController {
     log('Response status: ${response.statusCode}');
     if (response.statusCode != 200) {
       log('Response body: ${response.body}');
+      prefs.setBool('isLoggedIn', false);
+      prefs.setBool('isUser', false);
       Get.snackbar(
-        'Error',
-        'Invalid email or password',
+        "Fail",
+        "Invalid email or password",
         snackPosition: SnackPosition.BOTTOM,
       );
+      // Get.offAllNamed(AppRoutes.login);
       return;
     }
     final token =
@@ -118,6 +133,7 @@ class AuthController extends GetxController {
     prefs.setString('token', token);
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', false);
+    Get.offAndToNamed(AppRoutes.doctorHome);
   }
 
   Future userRegister() async {
