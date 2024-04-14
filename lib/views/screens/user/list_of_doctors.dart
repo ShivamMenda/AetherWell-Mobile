@@ -1,4 +1,5 @@
 import 'package:aetherwell/controllers/user/user_listofdoctors_controller.dart';
+import 'package:aetherwell/views/screens/user/appointment_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -26,106 +27,107 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
           child: Column(
             children: [
               SizedBox(height: 10,),
-              Text("Select Your Preffered Doctor",style: TextStyle(color: Colors.blueGrey,fontSize: 24,fontWeight: FontWeight.bold),),
+              Text("Select Your Preffered Doctor",style: TextStyle(color: Colors.white70,fontSize: 24,fontWeight: FontWeight.bold),),
               SizedBox(height: 20,),
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context,int index){
-                return SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    elevation: 2,
-                    color: Colors.blueAccent.withOpacity(0.05),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: (){},
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        color: Colors.blueAccent.withOpacity(0.05),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.schedule, color: Colors.white70),
-                              SizedBox(width: 10),
-                              Text(
-                                "Here's Your Appointment Details",
-                                style: TextStyle(
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.blueGrey,
+                                    backgroundImage: NetworkImage(
+                                      "https://source.unsplash.com/featured/?doctor",
+                                    ),
+                                  ),
+                                  SizedBox(width: 12),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${listOfDoctorsController.DoctorsList[index].name}",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(height: 2),
+                                      Text(
+                                        "${listOfDoctorsController.DoctorsList[index].hospital}",
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(height: 2),
+                                      Text(
+                                        "${listOfDoctorsController.DoctorsList[index].email}",
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(height: 2),
+                                      Text(
+                                        "${listOfDoctorsController.DoctorsList[index].specialization}",
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AppointmentBookingScreen(
+                                        doctor: listOfDoctorsController.DoctorsList[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.keyboard_arrow_right,
                                   color: Colors.white70,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
-                          ListTile(
-                            leading: Icon(
-                              Icons.today,
-                              color: Colors.white70,
-                            ),
-                            title: Text(
-                              "Number of Appointments Today: $dailyAppointments",
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              Icons.calendar_view_week,
-                              color: Colors.white70,
-                            ),
-                            title: Text(
-                              "Number of Appointments for the Week: $weeklyAppointments",
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            "Doctor Information:",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Name: Doctor Name",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            "Email: doctor@example.com",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            "Phone No: +1234567890",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 );
 
 
+
+
                 },
-                itemCount: listOfDoctorsController.appointmentList.length,
+                itemCount: listOfDoctorsController.DoctorsList.length,
               )
             ],
           ),

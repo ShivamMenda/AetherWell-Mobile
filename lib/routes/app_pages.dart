@@ -19,6 +19,7 @@ import 'package:aetherwell/views/screens/user/list_of_doctors.dart';
 import 'package:aetherwell/views/screens/user/profile_screen.dart';
 import 'package:aetherwell/views/screens/user/user_appointments.dart';
 import 'package:aetherwell/views/screens/user/user_recommendation_screen.dart';
+import '../models/doctor.dart';
 import 'app_routes.dart';
 import 'package:get/get.dart';
 import 'package:aetherwell/views/screens/splash_screen.dart';
@@ -89,7 +90,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.appointmentBooking,
-      page: () => AppointmentBookingScreen(),
+      page: () => AppointmentBookingScreen(doctor: null,),
     ),
   ];
 }
