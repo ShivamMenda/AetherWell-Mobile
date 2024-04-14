@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 class UserRecordTile extends StatefulWidget {
   final String? dateTitle;
   final String? doctorName;
-  final String? status;
+  final String? hospitalName;
   final String? startTime;
   final void Function() onViewDetails;
   UserRecordTile({
@@ -13,7 +13,7 @@ class UserRecordTile extends StatefulWidget {
     required this.dateTitle,
     required this.startTime,
     required this.doctorName,
-    required this.status,
+    required this.hospitalName,
     required this.onViewDetails,
   }) : super(key: key);
 
@@ -105,7 +105,7 @@ class _UserRecordTileState extends State<UserRecordTile> {
                   SizedBox(
                     width: 5,
                   ),
-                  Text(widget.status ?? ""),
+                  Text(widget.hospitalName ?? ""),
                 ],
               ),
             ]),

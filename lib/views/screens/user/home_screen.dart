@@ -76,8 +76,8 @@ class UserHomeScreen extends StatelessWidget {
 
                             return UserRecordTile(
                               dateTitle: dateTitle,
-                              status: userHomeController
-                                  .appointmentList[index].status.name,
+                              hospitalName: userHomeController
+                                  .appointmentList[index].hospitalName,
                               doctorName: doctorName,
                               startTime: startTime,
                               onViewDetails: () {},

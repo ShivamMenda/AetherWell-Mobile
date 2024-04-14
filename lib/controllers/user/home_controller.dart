@@ -10,8 +10,10 @@ import 'package:http/http.dart' as http;
 
 class AppointmentDisplay extends Appointment {
   final String doctorName;
+  final String hospitalName;
   AppointmentDisplay({
     required this.doctorName,
+    required this.hospitalName,
     required id,
     required doctorId,
     required userId,
@@ -29,7 +31,8 @@ class AppointmentDisplay extends Appointment {
           status: status,
         );
 
-  AppointmentDisplay.fromAppointment(Appointment appointment, this.doctorName)
+  AppointmentDisplay.fromAppointment(
+      Appointment appointment, this.doctorName, this.hospitalName)
       : super(
           id: appointment.id,
           doctorId: appointment.doctorId,
@@ -51,7 +54,7 @@ class UserHomeController extends GetxController {
     super.onInit();
   }
 
-  Future<String> getDoctor(String id) async {
+  Future<List<String>> getDoctor(String id) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
@@ -67,11 +70,11 @@ class UserHomeController extends GetxController {
     log('Response status: ${response.statusCode}');
     if (response.statusCode != 200) {
       log('Response body: ${response.body}');
-      return "Error";
+      return ["Error", "Error 2"];
     }
     final data = jsonDecode(response.body) as Map<String, dynamic>;
 
-    return data['profile']['name'];
+    return [data['profile']['name'], data['profile']['hospital'] ?? ''];
   }
 
   Future fetchAppointments() async {
@@ -89,10 +92,11 @@ class UserHomeController extends GetxController {
       final List<dynamic> data = responseData['appointments'];
       final List<AppointmentDisplay> appointmentsLi = [];
       for (final app in data) {
-        final doctorName = await getDoctor(app['doctorId']);
+        final [doctorName, hostpitalName] = await getDoctor(app['doctorId']);
         appointmentsLi.add(AppointmentDisplay.fromAppointment(
           Appointment.fromJSON(app as Map<String, dynamic>),
           doctorName,
+          hostpitalName,
         ));
       }
       appointmentList.value = appointmentsLi;
