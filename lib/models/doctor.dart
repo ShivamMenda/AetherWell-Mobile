@@ -7,11 +7,7 @@ class SlotSchema {
   late String end;
   late String status;
 
-  SlotSchema({
-    required this.start,
-    required this.end,
-    required this.status
-  });
+  SlotSchema({required this.start, required this.end, required this.status});
 
   factory SlotSchema.fromJson(Map<String, dynamic> json) {
     //by default as string
@@ -41,7 +37,9 @@ class DayAvailabilitySchema {
   factory DayAvailabilitySchema.fromJson(Map<String, dynamic> json) {
     return DayAvailabilitySchema(
       day: json['day'] as String,
-      slots: (json['slots'] as List).map((slotJson) => SlotSchema.fromJson(slotJson)).toList(),
+      slots: (json['slots'] as List)
+          .map((slotJson) => SlotSchema.fromJson(slotJson))
+          .toList(),
     );
   }
 
@@ -55,27 +53,26 @@ class DayAvailabilitySchema {
 //enum for doctor role
 
 //Defining an enum for role
-enum DoctorRole{
-  user,
-  doctor
-}
+enum DoctorRole { user, doctor }
+
 //Pasring the enum to an string
-extension ParseToString on DoctorRole{
+extension ParseToString on DoctorRole {
   String toShortString() {
     return toString().split('.').last;
   }
 }
+
 //doctor main schema
 class Doctor {
   late String username;
-  late String password;
+  //late String password;
   late String email;
   late DoctorRole role;
   late String name;
   late int age;
   late String specialization;
   late String hospital;
-  String? gender;
+  // String? gender;
   String? address;
   String? phone;
   ObjectId? id;
@@ -83,14 +80,14 @@ class Doctor {
 
   Doctor({
     required this.username,
-    required this.password,
+    //required this.password,
     required this.email,
     required this.role,
     required this.name,
     required this.age,
     required this.specialization,
     required this.hospital,
-    this.gender,
+    //this.gender,
     this.address,
     this.phone,
     this.id,
@@ -100,35 +97,39 @@ class Doctor {
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
       username: json['username'] as String,
-      password:"",
+      //password:"",
       email: json['email'] as String,
-      role: json['role']=="doctor"?DoctorRole.doctor:DoctorRole.user,
+      role: json['role'] == "doctor" ? DoctorRole.doctor : DoctorRole.user,
       name: json['name'] as String,
-      age:json['age'] as int,
+      age: json['age'] as int,
       specialization: json['specialization'] as String,
-      gender:json['gender'] as String,
+      //gender:json['gender'] as String,
       hospital: json['hospital'] as String,
       address: json['address'] as String?,
       phone: json['phone'] as String?,
       id: json['id'] != null ? ObjectId.parse(json['id'] as String) : null,
-      availability: (json['availability'] as List).map((dayJson) => DayAvailabilitySchema.fromJson(dayJson)).toList(),
+      availability: (json['availability'] as List)
+          .map((dayJson) => DayAvailabilitySchema.fromJson(dayJson))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'username': username,
-      'password': password,
+      //'password': password,
       'email': email,
       'role': role.name,
-      'age':age,
+      'age': age,
       'name': name,
       'specialization': specialization,
       'hospital': hospital,
       'address': address,
-      'gender':gender,
+      //'gender':gender,
       'phone': phone,
-      'availability': availability.map((dayAvailability) => dayAvailability.toJson()).toList(),
+      'availability': availability
+          .map((dayAvailability) => dayAvailability.toJson())
+          .toList(),
     };
   }
 }

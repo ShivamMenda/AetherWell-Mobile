@@ -18,13 +18,13 @@ class User {
   late String email;
   //Note Password is for sending and while receiving we dont need it so it will be an empty String in the factory convertor.
   //late String password;
-  //late String username;
+  late String username;
   //We can consider using enum and a conveter to string
   late UserRole role;
 
   //Nullable fields
   int? age;
-  //String? gender;
+  String? gender;
   String? address;
   String? phone;
   //User id synthesised in backend and sent
@@ -35,10 +35,10 @@ class User {
     required this.name,
     required this.email,
     //required this.password,
-    //required this.username,
+    required this.username,
     required this.role,
     this.age,
-    //this.gender,
+    this.gender,
     this.address,
     this.phone,
     this.id,
@@ -51,10 +51,10 @@ class User {
       email: json['email'],
       //Password will not be reutrned just for modelling and sending JSON we have the field.
       //password: "",
-      //username: json['username'],
+      username: json['username'],
       role: role,
       age: json['age'] as int,
-      //gender: json['gender'],
+      gender: json['gender'],
       address: json['address'],
       phone: json['phone'],
       id: ObjectId.parse(id),
@@ -70,7 +70,7 @@ class User {
       //'username': username,
       'role': role.name,
       'age': age,
-      //'gender': gender,
+      'gender': gender,
       'address': address,
       'phone': phone,
     };
