@@ -346,7 +346,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         "Register",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      onPressed: () {},
+                      onPressed: () async{
+                      authController.email.value=emailController.text;
+                      authController.password.value=passwordController.text;
+                      authController.username.value=usernameController.text;
+                      authController.fullName.value=fullNameController.text;
+                      authController.age.value=ageController.text;
+                      authController.address.value=specaddressController.text;
+                      authController.phone.value=hospPhoneController.text;
+                      authController.gender.value=genderController.text;
+                      await authController.isUser.value?authController.userRegister():authController.doctorRegister();
+                      },
                     ),
                   ),
                   SizedBox(

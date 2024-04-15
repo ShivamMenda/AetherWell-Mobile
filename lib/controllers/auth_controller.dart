@@ -16,6 +16,12 @@ class AuthController extends GetxController {
   final RxBool isUser = true.obs;
   final RxString email = ''.obs;
   final RxString password = ''.obs;
+  final RxString username=''.obs;
+  final RxString fullName=''.obs;
+  final RxString age=''.obs;
+  final RxString address=''.obs;
+  final RxString phone=''.obs;
+  final RxString gender=''.obs;
   late User user;
   late Doctor doctor;
 
@@ -164,7 +170,14 @@ class AuthController extends GetxController {
 
   Future userRegister() async {
     final prefs = await SharedPreferences.getInstance();
-
+    print(email.value);
+    print(password.value);
+    print(username.value);
+    print(age.value);
+    print(gender.value);
+    print(address.value);
+    print(phone.value);
+    print(fullName.value);
     // On success only if not default value
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', true);
@@ -172,7 +185,16 @@ class AuthController extends GetxController {
 
   Future doctorRegister() async {
     final prefs = await SharedPreferences.getInstance();
-
+    print(email.value);
+    print(password.value);
+    print(username.value);
+    print(age.value);
+    print(gender.value);
+    //Prints specialisation =>user.address===doctor.specialisation same controller
+    print(address.value);
+    //Prints Hospital => user.phone===doctor.hospital same controller
+    print(phone.value);
+    print(fullName.value);
     // On success only if not default value
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', false);
