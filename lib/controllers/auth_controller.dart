@@ -16,12 +16,12 @@ class AuthController extends GetxController {
   final RxBool isUser = true.obs;
   final RxString email = ''.obs;
   final RxString password = ''.obs;
-  final RxString username=''.obs;
-  final RxString fullName=''.obs;
-  final RxString age=''.obs;
-  final RxString address=''.obs;
-  final RxString phone=''.obs;
-  final RxString gender=''.obs;
+  final RxString username = ''.obs;
+  final RxString fullName = ''.obs;
+  final RxString age = ''.obs;
+  final RxString address = ''.obs;
+  final RxString phone = ''.obs;
+  final RxString gender = ''.obs;
   late User user;
   late Doctor doctor;
 
@@ -178,6 +178,44 @@ class AuthController extends GetxController {
     print(address.value);
     print(phone.value);
     print(fullName.value);
+
+    final url = Uri.parse('$kNodeApiUrl/api/v1/auth/users/register');
+    final body = jsonEncode({
+      'email': email.value,
+      'password': password.value,
+      'name': fullName.value,
+      'username': username.value,
+      'age': age.value,
+      'gender': gender.value,
+      'address': address.value,
+      'phone': phone.value,
+    });
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: body,
+    );
+    log('Response status: ${response.statusCode}');
+    if (response.statusCode != 201) {
+      log('Response body: ${response.body}');
+      prefs.setBool('isLoggedIn', false);
+      prefs.setBool('isUser', true);
+      Get.snackbar(
+        "Fail",
+        "Failed to register user",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+    Get.snackbar(
+      'Success',
+      'User registered',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+    await userLogin();
     // On success only if not default value
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', true);
@@ -196,6 +234,45 @@ class AuthController extends GetxController {
     print(phone.value);
     print(fullName.value);
     // On success only if not default value
+
+    final url = Uri.parse('$kNodeApiUrl/api/v1/auth/doctors/register');
+    final body = jsonEncode({
+      'email': email.value,
+      'password': password.value,
+      'name': fullName.value,
+      'username': username.value,
+      'age': age.value,
+      'gender': gender.value,
+      'specialization': address.value,
+      'hospital': phone.value,
+      'role': 'doctor',
+    });
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: body,
+    );
+    log('Response status: ${response.statusCode}');
+    if (response.statusCode != 201) {
+      log('Response body: ${response.body}');
+      prefs.setBool('isLoggedIn', false);
+      prefs.setBool('isUser', false);
+      Get.snackbar(
+        "Fail",
+        "Failed to register doctor",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+    Get.snackbar(
+      'Success',
+      'Doctor registered',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+    await doctorLogin();
     prefs.setBool('isLoggedIn', true);
     prefs.setBool('isUser', false);
   }
