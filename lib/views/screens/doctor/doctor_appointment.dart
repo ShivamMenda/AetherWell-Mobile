@@ -37,7 +37,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: doctorAppointmentController.appointmentList.length>0?Column(
             children: [
               SizedBox(height: 20,),
               Text("Here Are All Your Appointments",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize:24),),
@@ -61,27 +61,27 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                         // A SlidableAction can have an icon and/or a label.
                         SlidableAction(
                           onPressed:(context){} ,
-                          backgroundColor:doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                          backgroundColor:doctorAppointmentController.appointmentList[index].status == "confirmed"
                               ? Colors.green
                               : Colors.redAccent,
                           foregroundColor: Colors.white,
                           icon:
-                            doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                            doctorAppointmentController.appointmentList[index].status == "confirmed"
                                 ? Icons.done
                                 : Icons.delete,
-                          label:doctorAppointmentController.appointmentList[index]['status']=="confirmed"?"Booked":"Cancel" ,
+                          label:doctorAppointmentController.appointmentList[index].status=="confirmed"?"Booked":"Cancel" ,
                         ),
                         SlidableAction(
                           onPressed:(context){} ,
-                          backgroundColor:doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                          backgroundColor:doctorAppointmentController.appointmentList[index].status== "confirmed"
                               ? Colors.redAccent
                               : Colors.green,
                           foregroundColor: Colors.white,
                           icon:
-                          doctorAppointmentController.appointmentList[index]['status'] == "confirmed"
+                          doctorAppointmentController.appointmentList[index].status == "confirmed"
                               ? Icons.delete
                               : Icons.restart_alt,
-                          label:doctorAppointmentController.appointmentList[index]['status']=="confirmed"?"Cancel":"Rebook" ,
+                          label:doctorAppointmentController.appointmentList[index].status=="confirmed"?"Cancel":"Rebook" ,
                         ),
 
                       ],
@@ -108,7 +108,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                   Icon(Icons.date_range_outlined, color: Colors.white70),
                                   SizedBox(height: 8),
                                   Text(
-                                    "20-04-2024",
+                                    doctorAppointmentController.appointmentList[index].date.toIso8601String(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -127,42 +127,42 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Patient Name",
+                                      doctorAppointmentController.appointmentListNames[index],
                                       style: TextStyle(
                                         color: Colors.blueAccent,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
-                                      doctorAppointmentController.appointmentList[index]['patientName']!,
+                                      doctorAppointmentController.appointmentList[index].startTime,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     SizedBox(height: 8),
                                     Text(
-                                      "Diagnosis",
+                                      "Start Time",
                                       style: TextStyle(
                                         color: Colors.blueAccent,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
-                                      doctorAppointmentController.appointmentList[index]['diagnostics']!,
+                                      doctorAppointmentController.appointmentList[index].startTime,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     SizedBox(height: 8),
                                     Text(
-                                      "Gender",
+                                      "End Time",
                                       style: TextStyle(
                                         color: Colors.blueAccent,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
-                                      doctorAppointmentController.appointmentList[index]['gender']!,
+                                      doctorAppointmentController.appointmentList[index].endTime!,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -208,6 +208,16 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
 
                   }),
             ],
+          ):Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 50),
+                Text("No appointments Avaiable at the Moment.",style: TextStyle(color: Colors.white38,fontSize: 36,fontWeight: FontWeight.bold),),
+              ],
+            ),
           ),
         ),
       ),

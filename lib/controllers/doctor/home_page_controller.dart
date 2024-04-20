@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
-
+import 'package:aetherwell/models/doctorappointments.dart';
 class DoctorHomeController extends GetxController {
+
+
   List<Map<String, String>> appointmentList = [
     {
       'patientName': 'John Doe',

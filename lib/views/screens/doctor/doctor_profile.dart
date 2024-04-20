@@ -70,17 +70,18 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         children: [
                           _buildTextFormField(doctorProfileController.name,
                               "Name", Icons.person),
-                          _buildTextFormField(doctorProfileController.email,
-                              "Email", Icons.email),
+                          _buildTextFormField(
+                              doctorProfileController.phone, "Phone", Icons.phone),
                         ],
                       ),
                     ),
                   ],
                 ),
-                _buildTextFormField(
-                    doctorProfileController.phone, "Phone", Icons.phone),
+                _buildTextFormField(doctorProfileController.email,
+                    "Email", Icons.email),
+
                 const SizedBox(height: 10),
-                _buildTextFormField(doctorProfileController.experience,
+                _buildTextFormField(doctorProfileController.aboutController,
                     "About me", Icons.text_rotation_angledown_sharp),
                 const SizedBox(height: 30),
                 const Text(
@@ -97,8 +98,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 _buildTextFormField(doctorProfileController.clinic,
                     "Clinic / Hospital", Icons.local_hospital),
                 const SizedBox(height: 10),
-                _buildTextFormField(doctorProfileController.experience,
-                    "Experience (Years)", Icons.timer),
+                _buildTextFormField(doctorProfileController.gender,
+                    "Gender", Icons.timer),
               ],
             ),
           ),
@@ -155,8 +156,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
               "Specialization", Icons.category),
           _buildTextField(doctorProfileController.clinic, "Clinic / Hospital",
               Icons.local_hospital),
-          _buildTextField(doctorProfileController.experience,
-              "Experience (Years)", Icons.timer),
+          _buildTextField(doctorProfileController.aboutController,
+              "About me", Icons.timer),
           const SizedBox(height: 16),
           MaterialButton(
             onPressed: () {},

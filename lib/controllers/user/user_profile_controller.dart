@@ -1,3 +1,4 @@
+import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,11 +11,12 @@ class UserProfileController extends GetxController {
 
   @override
   void onInit() {
-    name.text = "User Name";
-    email.text = "User Email";
-    phone.text = "Phone Number";
-    address.text = "Address";
-    gender.text = "Male/Female";
+    final loggedinuser=authController.user;
+    name.text = loggedinuser.name;
+    email.text = loggedinuser.email;
+    phone.text = loggedinuser.phone??"N/A";
+    address.text = loggedinuser.address??"N/A";
+    gender.text = loggedinuser.gender??"N/A";
     super.onInit();
     // Replace hardcoded values with actual values fetched from the API
   }
