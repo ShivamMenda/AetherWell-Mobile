@@ -49,6 +49,7 @@ class AuthController extends GetxController {
   }
 
   Future isUserLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
     try {
       if (await getLoginState() == true) {
         if (isUser.value == true) {
@@ -59,10 +60,12 @@ class AuthController extends GetxController {
           Get.offAllNamed(AppRoutes.doctorHome);
         }
       } else {
+        prefs.setBool('isLoggedIn', false);
         Get.offAllNamed(AppRoutes.login);
       }
     } catch (e) {
       log(e.toString());
+      prefs.setBool('isLoggedIn', false);
       Get.offAllNamed(AppRoutes.login);
     }
   }

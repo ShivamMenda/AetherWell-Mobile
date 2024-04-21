@@ -9,6 +9,6 @@ import 'package:aetherwell/controllers/auth_controller.dart';
 class DoctorAppointmentBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(DoctorAppointmentController());
+    Get.put<DoctorAppointmentController>(DoctorAppointmentController());
   }
 }

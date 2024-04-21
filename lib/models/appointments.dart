@@ -27,7 +27,7 @@ Status getStatus(String s) {
 class Appointment {
   late ObjectId id;
   late ObjectId doctorId;
-  late ObjectId userId;
+  late Map<String, dynamic> userId;
   late DateTime date;
   late String startTime;
   late String endTime;
@@ -49,7 +49,7 @@ class Appointment {
     return Appointment(
       id: ObjectId.parse(json['_id'] as String),
       doctorId: ObjectId.parse(json['doctorId'] as String),
-      userId: ObjectId.parse(json['userId'] as String),
+      userId: json['userId'] as Map<String, dynamic>,
       date: DateTime.parse(json['date']),
       startTime: json['startTime'],
       endTime: json['endTime'],
@@ -62,7 +62,7 @@ class Appointment {
     return {
       '_id': id.oid,
       'doctorId': doctorId.oid,
-      'userId': userId.oid,
+      'userId': userId,
       'date': date.toIso8601String(),
       'startTime': startTime,
       'endTime': endTime,

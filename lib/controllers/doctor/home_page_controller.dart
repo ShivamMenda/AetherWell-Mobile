@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:aetherwell/models/doctorappointments.dart';
+
 class DoctorHomeController extends GetxController {
 
 
