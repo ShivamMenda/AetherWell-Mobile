@@ -92,7 +92,8 @@ class UserHomeController extends GetxController {
       final List<dynamic> data = responseData['appointments'];
       final List<AppointmentDisplay> appointmentsLi = [];
       for (final app in data) {
-        final [doctorName, hostpitalName] = await getDoctor(app['doctorId']);
+        final [doctorName, hostpitalName] =
+            await getDoctor(app['doctorId']['_id']);
         appointmentsLi.add(AppointmentDisplay.fromAppointment(
           Appointment.fromJSON(app as Map<String, dynamic>),
           doctorName,
