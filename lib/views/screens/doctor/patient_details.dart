@@ -33,48 +33,50 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
         ],
         title: Text('Patient Details'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 3.h,
-            ),
-            Text(
-              "Check Your Patient's Details",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.sp),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: doctorPatientController.patientList.length,
-              itemBuilder: (BuildContext context, int index) {
-                // ignore: unused_local_variable
-                Color? tileColor = Colors.blueAccent.withOpacity(0.05);
+      body: Obx(
+        ()=>doctorPatientController.isLoading.value?
+            Center(
+              child: CircularProgressIndicator(),
+            )
+            : SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 3.h,
+              ),
+              Text(
+                "Check Your Patient's Details",
+                style: TextStyle(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.sp),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: doctorPatientController.patientList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // ignore: unused_local_variable
+                  Color? tileColor = Colors.blueAccent.withOpacity(0.05);
 
-                return PatientRecordTile(
-                  patientId: doctorPatientController.patientList[index]
-                      ['patientId'],
-                  patientName: doctorPatientController.patientList[index]
-                      ['patientName'],
-                  age: doctorPatientController.patientList[index]['age'],
-                  contactNumber: doctorPatientController.patientList[index]
-                      ['contactNumber'],
-                  pastAppointments: doctorPatientController.patientList[index]
-                      ['pastAppointments'],
-                  nextAppointmentDate: doctorPatientController
-                      .patientList[index]['nextAppointmentDate'],
-                  borderColor: Colors.blueAccent,
-                  textColor: Colors.white70,
-                );
-              },
-            ),
-          ],
+                  return PatientRecordTile(
+                    patientId: doctorPatientController.patientList[index].userId['_id'].toString(),
+                    patientName: doctorPatientController.patientList[index].userId['name'],
+                    age: doctorPatientController.patientList[index].userId['age'].toString(),
+                    contactNumber: doctorPatientController.patientList[index].userId['phone'],
+                    gender: doctorPatientController.patientList[index].userId['gender'],
+                    email: doctorPatientController
+                        .patientList[index].userId['email'],
+                    borderColor: Colors.blueAccent,
+                    textColor: Colors.white70,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

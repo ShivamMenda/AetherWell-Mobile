@@ -1,47 +1,63 @@
-import 'package:get/get.dart';
+import 'dart:convert';
+import 'dart:developer';
 
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/appointments.dart';
+import '../../utils/constants.dart';
+import 'package:http/http.dart' as http;
 class DoctorPatientController extends GetxController {
-  List<Map<String, String>> patientList = [
-    {
-      'patientId': '001',
-      'patientName': 'John Doe',
-      'age': '35',
-      'contactNumber': '+1234567890',
-      'pastAppointments': '3',
-      'nextAppointmentDate': '2024-04-10',
-    },
-    {
-      'patientId': '002',
-      'patientName': 'Jane Smith',
-      'age': '28',
-      'contactNumber': '+1987654321',
-      'pastAppointments': '5',
-      'nextAppointmentDate': '2024-04-12',
-    },
-    {
-      'patientId': '003',
-      'patientName': 'David Johnson',
-      'age': '42',
-      'contactNumber': '+1122334455',
-      'pastAppointments': '2',
-      'nextAppointmentDate': '2024-04-15',
-    },
-    {
-      'patientId': '004',
-      'patientName': 'Emily Brown',
-      'age': '55',
-      'contactNumber': '+1432567890',
-      'pastAppointments': '4',
-      'nextAppointmentDate': '2024-04-18',
-    },
-    {
-      'patientId': '005',
-      'patientName': 'Michael Williams',
-      'age': '40',
-      'contactNumber': '+1654321987',
-      'pastAppointments': '6',
-      'nextAppointmentDate': '2024-04-20',
-    },
-  ];
+  List<Appointment> patientList = [];
+  List<String> patientListProfile = [];
+  final RxBool isLoading = false.obs;
+
+  @override
+  void onInit() async {
+    await getFullListOnDay();
+
+    super.onInit();
+  }
+
+  Future getFullListOnDay() async {
+    isLoading.value = true;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+      final header = <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      };
+
+      final url = Uri.parse('$kNodeApiUrl/api/v1/doctors/appointments');
+      final response = await http.get(
+        url,
+        headers: header,
+      );
+      if (response.statusCode != 200) {
+        print(response.body);
+        print("Something went wrong");
+        print(response.statusCode);
+        return;
+      }
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      patientList = (data['appointments'] as List)
+          .map((appointmentJson) => Appointment.fromJSON(appointmentJson))
+          .toList();
+
+      //Now get the full patient details
+      for (int i = 0; i < patientList.length; i++) {
+        print(patientList[i].userId);
+
+      }
+
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      log(e.toString());
+    }
+  }
+
+
 
 }

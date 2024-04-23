@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -7,8 +9,8 @@ class PatientRecordTile extends StatelessWidget {
   final String? patientName;
   final String? age;
   final String? contactNumber;
-  final String? pastAppointments;
-  final String? nextAppointmentDate;
+  final String? gender;
+  final String? email;
   final Color borderColor;
   final Color textColor;
 
@@ -18,8 +20,8 @@ class PatientRecordTile extends StatelessWidget {
     required this.patientName,
     required this.age,
     required this.contactNumber,
-    required this.pastAppointments,
-    required this.nextAppointmentDate,
+    required this.gender,
+    required this.email,
     required this.borderColor,
     required this.textColor,
   }) : super(key: key);
@@ -89,10 +91,10 @@ class PatientRecordTile extends StatelessWidget {
               Text("Contact Number: $contactNumber",
                   style: TextStyle(color: textColor)),
               SizedBox(height: 0.7.h),
-              Text("Past Appointments: $pastAppointments",
+              Text("Past Appointments: $gender",
                   style: TextStyle(color: textColor)),
               SizedBox(height: 0.7.h),
-              Text("Next Appointment Date: $nextAppointmentDate",
+              Text("Next Appointment Date: $email",
                   style: TextStyle(color: textColor)),
             ],
           ),
