@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppointmentDetailsCard extends StatelessWidget {
   final int dailyAppointments;
-  final int weeklyAppointments;
+  final int totalAppointments;
 
   AppointmentDetailsCard({
     required this.dailyAppointments,
-    required this.weeklyAppointments,
+    required this.totalAppointments,
   });
 
   @override
@@ -58,7 +58,7 @@ class AppointmentDetailsCard extends StatelessWidget {
                   color: Colors.white70,
                 ),
                 title: Text(
-                  "Number of Appointments for the Week: $weeklyAppointments",
+                  "Number of Appointments in Total: $totalAppointments",
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 14,

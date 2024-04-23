@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/appointments.dart';
+
 class AppointmentCard extends StatelessWidget {
-  final Map<String, String> appointmentDetails;
+  final Appointment appointmentDetails;
+  final String patientName;
   final Color tileColor;
   final VoidCallback onViewDetails;
 
   AppointmentCard({
+    required this.patientName,
     required this.appointmentDetails,
     required this.tileColor,
     required this.onViewDetails,
@@ -27,7 +31,7 @@ class AppointmentCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Patient Name: ${appointmentDetails['patientName']}",
+                "Patient Name: ${patientName}",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 16,
@@ -36,7 +40,7 @@ class AppointmentCard extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Diagnostics: ${appointmentDetails['diagnostics']}",
+                "Start Time: ${appointmentDetails.startTime}",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 14,
@@ -44,7 +48,7 @@ class AppointmentCard extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Gender: ${appointmentDetails['gender']}",
+                "Current Status: ${appointmentDetails.status}",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 14,
