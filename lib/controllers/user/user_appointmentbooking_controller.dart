@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aetherwell/routes/app_routes.dart';
 import 'package:aetherwell/utils/constants.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +96,7 @@ class UserAppointmentBookingController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
       );
-      Navigator.pop(Get.context!);
+      Get.offAllNamed(AppRoutes.userAppointments);
     } else {
       print(response.statusCode);
       final data = jsonDecode(response.body);

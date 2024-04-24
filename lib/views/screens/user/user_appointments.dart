@@ -1,5 +1,6 @@
 import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/controllers/user/user_appointment_controller.dart';
+import 'package:aetherwell/models/appointments.dart';
 import 'package:aetherwell/routes/app_routes.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
             },
           ),
         ],
-        title: Text('User Appointments'),
+        title: const Text('User Appointments'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -55,177 +56,186 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
               SizedBox(
                 height: 2.h,
               ),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: userAppointmentsController.appointmentList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Slidable(
-                      key: const ValueKey(0),
-                      endActionPane: ActionPane(
-                        // A motion is a widget used to control how the pane animates.
-                        motion: ScrollMotion(),
+              Obx(() => userAppointmentsController.isLoading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount:
+                          userAppointmentsController.appointmentList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Slidable(
+                          key: const ValueKey(0),
+                          endActionPane: ActionPane(
+                            // A motion is a widget used to control how the pane animates.
+                            motion: const ScrollMotion(),
 
-                        // A pane can dismiss the Slidable.
-                        dragDismissible: true,
+                            // A pane can dismiss the Slidable.
+                            dragDismissible: true,
 
-                        // All actions are defined in the children parameter.
-                        children:[
-                          // A SlidableAction can have an icon and/or a label.
-                          SlidableAction(
-                            onPressed:(context){} ,
-                            backgroundColor:userAppointmentsController.appointmentList[index]['status'] == "confirmed"
-                                ? Colors.green
-                                : Colors.redAccent,
-                            foregroundColor: Colors.white,
-                            icon:
-                            userAppointmentsController.appointmentList[index]['status'] == "confirmed"
-                                ? Icons.done
-                                : Icons.delete,
-                            label:userAppointmentsController.appointmentList[index]['status']=="confirmed"?"Booked":"Cancel" ,
-                          ),
-                          SlidableAction(
-                            onPressed:(context){} ,
-                            backgroundColor:userAppointmentsController.appointmentList[index]['status'] == "confirmed"
-                                ? Colors.redAccent
-                                : Colors.green,
-                            foregroundColor: Colors.white,
-                            icon:
-                            userAppointmentsController.appointmentList[index]['status'] == "confirmed"
-                                ? Icons.delete
-                                : Icons.restart_alt,
-                            label:userAppointmentsController.appointmentList[index]['status']=="confirmed"?"Cancel":"Rebook" ,
-                          ),
-
-                        ],
-                      ),
-                      child: SizedBox(
-                        height: Get.height / 4.8,
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(15), // Add border radius
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            // All actions are defined in the children parameter.
                             children: [
-                              // First Column
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(15)),
-                                    color: Colors.blueAccent),
-                                padding: EdgeInsets.all(8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.date_range_outlined,
-                                        color: Colors.white70),
-                                    SizedBox(height: 2.h),
-                                    Text(
-                                      "20-04-2024",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              // Second Column
-                              Expanded(
-                                child: Container(
-                                  color: Colors.transparent,
-                                  padding: EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Doctor Name",
-                                        style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        userAppointmentsController
-                                                .appointmentList[index]
-                                            ['doctorName']!,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        "Symptoms",
-                                        style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        userAppointmentsController
-                                            .appointmentList[index]['symptoms']!,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        "Gender",
-                                        style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        userAppointmentsController
-                                                    .appointmentList[index]
-                                                ['gender'] ??
-                                            "",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // Third Column depending on status
-                              Container(
-                                width: 60, // Fixed width for both containers
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(15),
-                                  ),
-                                ),
-                                padding: EdgeInsets.all(8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center, // Align text to center horizontally
-                                  children: [
-                                    SizedBox(height: 10,),
-                                    Icon(
-                                      Icons.keyboard_arrow_right,
-                                      color: Colors.white70,
-                                      size: 36,
-                                    ),
-                                    SizedBox(height: 10,),
-                                    Text("More\nDetails",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 12),),
-                                    SizedBox(height: 8),
-                                  ],
-                                ),
+                              // A SlidableAction can have an icon and/or a label.
+
+                              SlidableAction(
+                                onPressed: (context) {
+                                  if (userAppointmentsController
+                                          .appointmentList[index].status ==
+                                      Status.confirmed) {
+                                    userAppointmentsController
+                                        .cancelAppointment(index);
+                                  }
+                                },
+                                backgroundColor: userAppointmentsController
+                                            .appointmentList[index].status ==
+                                        Status.confirmed
+                                    ? Colors.redAccent
+                                    : Colors.green,
+                                foregroundColor: Colors.white,
+                                icon: userAppointmentsController
+                                            .appointmentList[index].status ==
+                                        Status.confirmed
+                                    ? Icons.delete
+                                    : Icons.restart_alt,
+                                label: userAppointmentsController
+                                            .appointmentList[index].status ==
+                                        Status.confirmed
+                                    ? "Cancel"
+                                    : "Re-Book",
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    );
-                  }),
+                          child: SizedBox(
+                            height: Get.height / 4.8,
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    15), // Add border radius
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // First Column
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            bottomLeft: Radius.circular(15)),
+                                        color: Colors.blueAccent),
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.date_range_outlined,
+                                            color: Colors.white70),
+                                        SizedBox(height: 2.h),
+                                        const Text(
+                                          "20-04-2024",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  // Second Column
+                                  Expanded(
+                                    child: Container(
+                                      color: Colors.transparent,
+                                      padding: const EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "Doctor Name",
+                                            style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            userAppointmentsController
+                                                .appointmentList[index]
+                                                .doctorName,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          const SizedBox(height: 8),
+                                          const Text(
+                                            "Hospital Name",
+                                            style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            userAppointmentsController
+                                                .appointmentList[index]
+                                                .hospitalName,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // Third Column depending on status
+                                  Container(
+                                    width:
+                                        60, // Fixed width for both containers
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(15),
+                                      ),
+                                    ),
+                                    padding: const EdgeInsets.all(8),
+                                    child: const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center, // Align text to center horizontally
+                                      children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Icon(
+                                          Icons.keyboard_arrow_right,
+                                          color: Colors.white70,
+                                          size: 36,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "More\nDetails",
+                                          style: TextStyle(
+                                              color: Colors.white70,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(height: 8),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      })),
             ],
           ),
         ),
@@ -234,7 +244,7 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
         onPressed: () {
           Get.toNamed(AppRoutes.listOfDoctors);
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white70,
         ),

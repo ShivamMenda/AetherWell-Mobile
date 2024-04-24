@@ -5,6 +5,7 @@ import 'package:aetherwell/models/appointments.dart';
 import 'package:aetherwell/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -92,6 +93,12 @@ class UserHomeController extends GetxController {
       final List<dynamic> data = responseData['appointments'];
       final List<AppointmentDisplay> appointmentsLi = [];
       for (final app in data) {
+        if (DateFormat('dd-MM-yyyy').format(DateTime.parse(app['date'])) !=
+            DateFormat('dd-MM-yyyy').format(DateTime.now())) {
+          print(DateFormat('dd-MM-yyyy').format(DateTime.parse(app['date'])));
+          print(DateFormat('dd-MM-yyyy').format(DateTime.now()));
+          continue;
+        }
         final [doctorName, hostpitalName] =
             await getDoctor(app['doctorId']['_id']);
         appointmentsLi.add(AppointmentDisplay.fromAppointment(
