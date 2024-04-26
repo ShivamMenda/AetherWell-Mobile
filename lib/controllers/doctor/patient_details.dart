@@ -41,14 +41,19 @@ class DoctorPatientController extends GetxController {
         return;
       }
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      patientList = (data['appointments'] as List)
+      // Convert the list of JSON objects into a Set then to a list of Appointment objects
+      List<Appointment> rawAppointmentList = (data['appointments'] as List)
           .map((appointmentJson) => Appointment.fromJSON(appointmentJson))
           .toList();
+
+      // Convert the list to a Set to remove duplicates and then back to a List
+      Set<Appointment> uniqueAppointmentsSet = rawAppointmentList.toSet();
+      patientList= uniqueAppointmentsSet.toList();
+
 
       //Now get the full patient details
       for (int i = 0; i < patientList.length; i++) {
         print(patientList[i].userId);
-
       }
 
       isLoading.value = false;

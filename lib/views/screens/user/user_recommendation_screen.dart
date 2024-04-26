@@ -1,5 +1,6 @@
 import 'package:aetherwell/controllers/user/user_recomendation_controller.dart';
 import 'package:aetherwell/utils/symptoms.dart';
+import 'package:aetherwell/views/screens/user/user_recommendation_selection.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,6 +69,14 @@ class UserRecommendationScreen extends StatelessWidget {
                 : const SizedBox(),
           ),
           ElevatedButton(
+            //For testing changed here user recomendation selection here
+            // onPressed:(){
+            //   Navigator.push(context,
+            //     MaterialPageRoute(
+            //       builder: (context) => UserRecommendationSelection(diseasesPrediction: ["Fever","Feverx10","Something","Fever","Feverx10","Something","Fever","Feverx10","Something","Fever"]),
+            //     ),
+            //   );
+            // },
             onPressed: controller.submit,
             style: ElevatedButton.styleFrom(
               backgroundColor: Get.theme.primaryColor,

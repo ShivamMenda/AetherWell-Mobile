@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/doctor/daily_appointments_list_card.dart';
 import '../../widgets/doctor/daily_appointments_main_card.dart';
+import '../appointment_detail.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   const DoctorHomeScreen({Key? key}) : super(key: key);
@@ -115,7 +116,29 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       tileColor: tileColor,
                       patientName: doctorHomeController.todaysAppointmentListNames[index],
                       onViewDetails: () {
-                        // Handle viewing more details
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppointmentDetails(
+                              appointmentId:doctorHomeController
+                                  .appointmentList[index].id.oid,
+                              startTime: doctorHomeController
+                                  .appointmentList[index].startTime,
+                              endTime: doctorHomeController
+                                  .appointmentList[index].endTime,
+                              status: doctorHomeController
+                                  .appointmentList[index].status.name,
+                              date: doctorHomeController
+                                  .appointmentList[index].date.toIso8601String().substring(0,10),
+                              patientName:doctorHomeController
+                                  .appointmentList[index].userId['name'],
+                              doctorName: doctorHomeController
+                                  .appointmentList[index].doctorId['name'],
+                              doctorId: doctorHomeController
+                                    .appointmentList[index].doctorId['_id']
+                            ),
+                          ),
+                        );
                       },
                     );
                   },

@@ -13,4 +13,6 @@ class AppRoutes {
   static const doctorHome = "/doctor/home";
   static const doctorProfile = "/doctor/profile";
   static const doctorAvailbitiyManagement = "/doctor/availbiltityManagement";
+  static const detailsForAppointments="/detailsForAppointment";
+  static const userRecommendationSelectionController='/user/recommedationSelection';
 }

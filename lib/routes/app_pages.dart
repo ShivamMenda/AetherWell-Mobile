@@ -1,3 +1,4 @@
+import 'package:aetherwell/bindings/appointment_detail_binding.dart';
 import 'package:aetherwell/bindings/doctor/doctor_appointment.dart';
 import 'package:aetherwell/bindings/doctor/doctor_home_binding.dart';
 import 'package:aetherwell/bindings/doctor/doctor_profile_binding.dart';
@@ -8,6 +9,8 @@ import 'package:aetherwell/bindings/user/user_appointment_binding.dart';
 import 'package:aetherwell/bindings/user/user_home_binding.dart';
 import 'package:aetherwell/bindings/user/user_profile_binding.dart';
 import 'package:aetherwell/bindings/user/user_recommendation_bindings.dart';
+import 'package:aetherwell/controllers/user/user_recommendation_selection_controller.dart';
+import 'package:aetherwell/views/screens/appointment_detail.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_appointment.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_availbiltity_management.dart';
 import 'package:aetherwell/views/screens/doctor/doctor_profile.dart';
@@ -20,6 +23,7 @@ import 'package:aetherwell/views/screens/user/list_of_doctors.dart';
 import 'package:aetherwell/views/screens/user/profile_screen.dart';
 import 'package:aetherwell/views/screens/user/user_appointments.dart';
 import 'package:aetherwell/views/screens/user/user_recommendation_screen.dart';
+import '../views/screens/user/user_recommendation_selection.dart';
 import 'app_routes.dart';
 import 'package:get/get.dart';
 import 'package:aetherwell/views/screens/splash_screen.dart';
@@ -95,5 +99,23 @@ class AppPages {
         doctor: null,
       ),
     ),
+    GetPage(name: AppRoutes.detailsForAppointments,
+      page: ()=>AppointmentDetails(
+        appointmentId: "NA",
+        startTime: "NA",
+        endTime: "NA",
+        status: "NA",
+        date: "NA",
+        patientName: "NA",
+        doctorName: "NA",
+        doctorId: "NA",
+      ),
+      binding: AppointmentDetailBinding(),
+    ),
+    GetPage(name: AppRoutes.userRecommendationSelectionController,
+        page: ()=>UserRecommendationSelection(
+          diseasesPrediction: [],
+        )),
+
   ];
 }
