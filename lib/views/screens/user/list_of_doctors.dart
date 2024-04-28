@@ -2,7 +2,7 @@ import 'package:aetherwell/controllers/user/user_listofdoctors_controller.dart';
 import 'package:aetherwell/views/screens/user/appointment_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
+
 
 class ListOfDoctorsScreen extends StatefulWidget {
   const ListOfDoctorsScreen({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
                 height: 10,
               ),
               const Text(
-                "Select Your Preffered Doctor",
+                "Select Your Prefered Doctor",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 24,
@@ -73,7 +73,7 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
                                       Row(
                                         children: [
                                           const CircleAvatar(
-                                            radius: 30,
+                                            radius: 25,
                                             backgroundColor: Colors.blueGrey,
                                             backgroundImage: NetworkImage(
                                               "https://source.unsplash.com/featured/?doctor",

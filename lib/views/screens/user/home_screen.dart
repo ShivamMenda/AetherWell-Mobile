@@ -58,8 +58,18 @@ class UserHomeScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : userHomeController.appointmentList.isEmpty
-                      ? const Center(
-                          child: Text('No appointments found'),
+                      ? Column(
+                          children: [
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Center(
+                              child: Text(
+                                "No Appointments found!",
+                                style: TextStyle(fontSize: 20.sp),
+                              ),
+                            ),
+                          ],
                         )
                       : ListView.builder(
                           shrinkWrap: true,
