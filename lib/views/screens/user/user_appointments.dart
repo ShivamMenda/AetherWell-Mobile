@@ -2,6 +2,7 @@ import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/controllers/user/user_appointment_controller.dart';
 import 'package:aetherwell/models/appointments.dart';
 import 'package:aetherwell/routes/app_routes.dart';
+import 'package:aetherwell/views/screens/appointment_detail.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -205,42 +206,79 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
                                         ),
                                       ),
                                       // Third Column depending on status
-                                      Container(
-                                        width:
-                                            60, // Fixed width for both containers
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomRight: Radius.circular(15),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(AppointmentDetails(
+                                            appointmentId:
+                                                userAppointmentsController
+                                                    .appointmentList[index]
+                                                    .id
+                                                    .oid,
+                                            startTime:
+                                                userAppointmentsController
+                                                    .appointmentList[index]
+                                                    .startTime,
+                                            endTime: userAppointmentsController
+                                                .appointmentList[index].endTime,
+                                            status: userAppointmentsController
+                                                .appointmentList[index]
+                                                .status
+                                                .name,
+                                            date: userAppointmentsController
+                                                .appointmentList[index].date
+                                                .toIso8601String()
+                                                .substring(0, 10)
+                                                .split('-')
+                                                .reversed
+                                                .join('-'),
+                                            patientName:
+                                                authController.user.name,
+                                            doctorName:
+                                                userAppointmentsController
+                                                    .appointmentList[index]
+                                                    .doctorName,
+                                            doctorId: userAppointmentsController
+                                                .appointmentList[index]
+                                                .doctorId['_id'],
+                                          ));
+                                        },
+                                        child: Container(
+                                          width:
+                                              60, // Fixed width for both containers
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(10),
+                                              bottomRight: Radius.circular(15),
+                                            ),
                                           ),
-                                        ),
-                                        padding: const EdgeInsets.all(8),
-                                        child: const Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .center, // Align text to center horizontally
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Icon(
-                                              Icons.keyboard_arrow_right,
-                                              color: Colors.white70,
-                                              size: 36,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "More\nDetails",
-                                              style: TextStyle(
-                                                  color: Colors.white70,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12),
-                                            ),
-                                            SizedBox(height: 8),
-                                          ],
+                                          padding: const EdgeInsets.all(8),
+                                          child: const Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .center, // Align text to center horizontally
+                                            children: [
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Icon(
+                                                Icons.keyboard_arrow_right,
+                                                color: Colors.white70,
+                                                size: 36,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "More\nDetails",
+                                                style: TextStyle(
+                                                    color: Colors.white70,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                              SizedBox(height: 8),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],

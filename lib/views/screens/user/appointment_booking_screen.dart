@@ -50,6 +50,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 height: 20,
               ),
               EasyInfiniteDateTimeLine(
+                  focusDate: userAppointmentBookingController.focusDate,
                   disabledDates: userAppointmentBookingController.disabledTime,
                   showTimelineHeader: false,
                   dayProps: EasyDayProps(
@@ -135,7 +136,6 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   ),
                   controller: userAppointmentBookingController.controller,
                   firstDate: userAppointmentBookingController.startTime,
-                  focusDate: userAppointmentBookingController.focusDate,
                   lastDate: userAppointmentBookingController.endTime,
                   onDateChange: (selectedDate) {
                     setState(() {
@@ -159,58 +159,34 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Center(
-                  child: CustomRadioButton(
-                    horizontal: true,
-                    buttonWidth: 110,
-                    buttonHeight: 50,
-                    selectedColor: Colors.blueAccent,
-                    initialSelection:
-                        userAppointmentBookingController.selectedIndex,
-                    radioButtonValue: (val, index) {
-                      setState(() {
-                        userAppointmentBookingController.selectedIndex = index;
-                        userAppointmentBookingController.selectedSlot = val;
-                      });
-                    },
-                    buttonLables: const [
-                      "7:00 AM",
-                      "8:00 AM",
-                      "9:00 AM",
-                      "10:00 AM",
-                      "11:00 AM",
-                      "12:00 PM",
-                      "1:00 PM",
-                      "2:00 PM",
-                      "3:00 PM",
-                      "4:00 PM",
-                      "5:00 PM",
-                      "6:00 PM",
-                      "7:00 PM",
-                      "8:00 PM",
-                      "9:00 PM",
-                    ],
-                    //Index value done here get the list and do index -1
-                    buttonValues: const [
-                      "7:00 AM",
-                      "8:00 AM",
-                      "9:00 AM",
-                      "10:00 AM",
-                      "11:00 AM",
-                      "12:00 PM",
-                      "1:00 PM",
-                      "2:00 PM",
-                      "3:00 PM",
-                      "4:00 PM",
-                      "5:00 PM",
-                      "6:00 PM",
-                      "7:00 PM",
-                      "8:00 PM",
-                      "9:00 PM",
-                    ],
-                    buttonColor: Colors.blueGrey,
-                    fontSize: 16,
-                    textColor: Colors.white70,
-                  ),
+                  child:
+                      Obx(() => userAppointmentBookingController.isLoading.value
+                          ? const CircularProgressIndicator()
+                          : CustomRadioButton(
+                              horizontal: true,
+                              buttonWidth: 110,
+                              buttonHeight: 50,
+                              selectedColor: Colors.blueAccent,
+
+                              radioButtonValue: (val, index) {
+                                setState(() {
+                                  userAppointmentBookingController
+                                      .selectedIndex = index;
+                                  userAppointmentBookingController
+                                      .selectedSlot = val;
+                                });
+                              },
+                              buttonLables: userAppointmentBookingController
+                                  .slots
+                                  .toList(),
+                              //Index value done here get the list and do index -1
+                              buttonValues: userAppointmentBookingController
+                                  .slots
+                                  .toList(),
+                              buttonColor: Colors.blueGrey,
+                              fontSize: 16,
+                              textColor: Colors.white70,
+                            )),
                 ),
               ),
               const SizedBox(

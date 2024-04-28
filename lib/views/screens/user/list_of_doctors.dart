@@ -3,7 +3,6 @@ import 'package:aetherwell/views/screens/user/appointment_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ListOfDoctorsScreen extends StatefulWidget {
   const ListOfDoctorsScreen({Key? key}) : super(key: key);
 
@@ -130,16 +129,13 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AppointmentBookingScreen(
-                                                doctor: listOfDoctorsController
-                                                    .doctorsList[index],
-                                              ),
-                                            ),
-                                          );
+                                          Get.to(
+                                              () => AppointmentBookingScreen(
+                                                  doctor:
+                                                      listOfDoctorsController
+                                                          .doctorsList[index]),
+                                              arguments: listOfDoctorsController
+                                                  .doctorsList[index]);
                                         },
                                         icon: const Icon(
                                           Icons.keyboard_arrow_right,

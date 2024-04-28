@@ -12,8 +12,65 @@ import 'package:http/http.dart' as http;
 import '../../models/doctor.dart';
 
 class UserAppointmentBookingController extends GetxController {
+  RxBool isLoading = false.obs;
+
+  RxList<String> slots = <String>[
+    "7:00 AM",
+    "8:00 AM",
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM",
+    "5:00 PM",
+    "6:00 PM",
+    "7:00 PM",
+    "8:00 PM",
+    "9:00 PM",
+  ].obs;
+
+  void getSlots() async {
+    isLoading.value = true;
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    final headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+
+    final url = Uri.parse(
+        "$kNodeApiUrl/api/v1/doctors/getAvailableSlots/${doctor!.id.oid}");
+    convertdate();
+    final body = jsonEncode(<String, String>{
+      "date": selectedDate,
+    });
+
+    final response = await http.get(
+      url,
+      headers: headers, /*body: body*/
+    );
+    print(response.body);
+    final data = jsonDecode(response.body)['slots'] as List;
+    print(data);
+    slots.clear();
+    for (int i = 0; i < data.length; i++) {
+      final slot = data[i] as Map<String, dynamic>;
+      if (slot['status'] == "available") {
+        final time = slot["start"] as String;
+        slots.add(time);
+      }
+    }
+    print(slots);
+    isLoading.value = false;
+  }
+
   void changeDate(DateTime selectedDate) {
     focusDate = selectedDate;
+    //getSlots();
   }
 
   void getDisabledDates() {
@@ -35,7 +92,7 @@ class UserAppointmentBookingController extends GetxController {
   List<DateTime> disabledTime = [];
 
   late int selectedIndex = 0;
-  late String selectedDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  String selectedDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
   late String selectedSlot = "7:00 AM";
   @override
   void onInit() {

@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentDetailController extends GetxController {
-  Future cancelAppointment(final aid,final did)async{
+  Future cancelAppointment(final aid, final did) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final url = Uri.parse('$kNodeApiUrl/api/v1/users/cancelAppointment');
