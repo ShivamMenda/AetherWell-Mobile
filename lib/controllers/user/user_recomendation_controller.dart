@@ -58,7 +58,7 @@ class UserRecommendationController extends GetxController {
   }
 
   Future<List<Pridections>> getResponse() async {
-    final Uri url = Uri.parse('http://10.0.2.2:4000/predict/');
+    final Uri url = Uri.parse('$kFlaskApiUrl/predict/');
     final body = jsonEncode(
       {
         'symptoms': selectedItems.map((element) => element).toList(),

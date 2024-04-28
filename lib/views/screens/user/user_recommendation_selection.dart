@@ -1,7 +1,12 @@
+import 'package:aetherwell/routes/app_routes.dart';
+import 'package:aetherwell/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRecommendationSelection extends StatefulWidget {
   final List<String> diseasesPrediction;
@@ -98,9 +103,32 @@ class _UserRecommendationSelectionState
             if (selectedIndex == null) {
               return;
             }
-            if (selectedIndex! > 2) {}
+            if (selectedIndex! > 2) {
+              Get.offAndToNamed(AppRoutes.userAppointments);
+              return;
+            }
+            final prefs = await SharedPreferences.getInstance();
+            final token = prefs.getString("token");
+            final headers = {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer $token",
+            };
+            final url =
+                Uri.parse("$kNodeApiUrl/api/v1/users/autoBookAppointment");
+            final body = jsonEncode({
+              "date": DateFormat('dd-MM-yyyy').format(DateTime.now()),
+            });
+            print(body);
+            final response = await http.post(url, headers: headers, body: body);
+            isLoading.value = false;
+            print(response.body);
+            if (response.statusCode == 200) {
+              Get.offAndToNamed(AppRoutes.userHome);
+            } else {
+              Get.snackbar("Error", "Failed to book appointment");
+            }
           },
-          child: const Text("OK"),
+          child: Text(selectedIndex! > 2 ? "Proceed" : "Auto Book"),
         ),
       ],
     ));
