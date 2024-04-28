@@ -57,7 +57,7 @@ class UserRecommendationController extends GetxController {
   }
 
   Future<List<Pridections>> getResponse() async {
-    final Uri url = Uri.parse('$kFlaskApiUrl/predict/');
+    final Uri url = Uri.parse('$kFlaskApiUrl/predict');
     final body = jsonEncode(
       {
         'symptoms': selectedItems.map((element) => element).toList(),
@@ -73,7 +73,7 @@ class UserRecommendationController extends GetxController {
       },
     );
     // replace \u000b with whitespace
-
+    print(response.body);
     final data = response.body.replaceAll(RegExp(r'\\u000b'), ' ');
 
     final decodedData = jsonDecode(data) as Map<String, dynamic>;
