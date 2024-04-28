@@ -53,7 +53,7 @@ class User {
       //Password will not be reutrned just for modelling and sending JSON we have the field.
       //password: "",
       role: role,
-      age: json['age'] as int,
+      age: json['age'] as int?,
       gender: json['gender'],
       address: json['address'],
       phone: json['phone'],

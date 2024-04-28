@@ -2,6 +2,7 @@ import 'package:aetherwell/controllers/auth_controller.dart';
 import 'package:aetherwell/controllers/user/user_profile_controller.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -44,45 +45,47 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 3.h),
-                Text(
-                  "Personal Information",
-                  style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 3.h),
-                const CircleAvatar(
-                  // backgroundImage: AssetImage(
-                  //     "assets/images/doctor_profile.jpeg"), // Replace the URL with any image URL
-                  radius: 50,
-                  backgroundColor: Colors.blueAccent,
-                ),
-                SizedBox(
-                  width: 3.w,
-                  height: 2.h,
-                ),
-                _buildTextFormField(
-                    userProfileController.name, "Name", Icons.person),
-                SizedBox(height: 1.h),
-                _buildTextFormField(
-                    userProfileController.email, "Email", Icons.email),
-                SizedBox(height: 1.h),
-                _buildTextFormField(
-                    userProfileController.phone, "Phone", Icons.phone),
-                SizedBox(height: 1.h),
-                _buildTextFormField(
-                    userProfileController.name, "Gender", Icons.info),
-                SizedBox(height: 1.h),
-                _buildTextFormField(
-                    userProfileController.address, "Address", Icons.home),
-              ],
-            ),
+            child: Obx(() => userProfileController.isLoading.value
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 3.h),
+                      Text(
+                        "Personal Information",
+                        style: TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 3.h),
+                      const CircleAvatar(
+                        // backgroundImage: AssetImage(
+                        //     "assets/images/doctor_profile.jpeg"), // Replace the URL with any image URL
+                        radius: 50,
+                        backgroundColor: Colors.blueAccent,
+                      ),
+                      SizedBox(
+                        width: 3.w,
+                        height: 2.h,
+                      ),
+                      _buildTextFormField(
+                          userProfileController.name, "Name", Icons.person),
+                      SizedBox(height: 1.h),
+                      _buildTextFormField(
+                          userProfileController.email, "Email", Icons.email),
+                      SizedBox(height: 1.h),
+                      _buildTextFormField(
+                          userProfileController.phone, "Phone", Icons.phone),
+                      SizedBox(height: 1.h),
+                      _buildTextFormField(
+                          userProfileController.name, "Gender", Icons.info),
+                      SizedBox(height: 1.h),
+                      _buildTextFormField(
+                          userProfileController.address, "Address", Icons.home),
+                    ],
+                  )),
           ),
         ),
       ),
@@ -90,11 +93,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         backgroundColor: Colors.blueAccent,
         child: Icon(Icons.edit, color: Colors.white),
         onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return _buildBottomSheet();
-            },
+          Get.bottomSheet(
+            SingleChildScrollView(child: _buildBottomSheet()),
+            backgroundColor: Get.theme.colorScheme.secondaryContainer,
           );
         },
       ),
@@ -139,7 +140,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           _buildTextField(userProfileController.address, "Address", Icons.home),
           SizedBox(height: 3.h),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              userProfileController.updateProfile();
+            },
             child: Text("Update Now"),
             color: Colors.blueAccent,
             minWidth: Get.width * 0.5,
