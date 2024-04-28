@@ -2,7 +2,7 @@ import 'package:aetherwell/controllers/user/user_listofdoctors_controller.dart';
 import 'package:aetherwell/views/screens/user/appointment_booking_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
+
 
 class ListOfDoctorsScreen extends StatefulWidget {
   const ListOfDoctorsScreen({Key? key}) : super(key: key);

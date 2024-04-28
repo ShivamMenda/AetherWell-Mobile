@@ -2,10 +2,10 @@ import 'package:aetherwell/controllers/user/user_appointmentbooking_controller.d
 import 'package:aetherwell/models/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:radio_grouped_buttons/radio_grouped_buttons.dart';
 
+// ignore: must_be_immutable
 class AppointmentBookingScreen extends StatefulWidget {
   late Doctor? doctor;
   AppointmentBookingScreen({Key? key, required this.doctor}) : super(key: key);

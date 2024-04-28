@@ -1,4 +1,7 @@
-import 'package:aetherwell/controllers/appointment_detail.dart';
+import 'package:aetherwell/controllers/user/appointment_detail.dart';
+import 'package:aetherwell/controllers/doctor/doctor_appointment_detail.dart';
+import 'package:aetherwell/routes/app_routes.dart';
+import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +32,8 @@ class AppointmentDetails extends StatefulWidget {
 
 class _AppointmentDetailsState extends State<AppointmentDetails> {
   final appointmentDetailController = Get.put(AppointmentDetailController());
+  final DoctorAppointmentDetailController doctorAppointmentDetailController =
+      Get.put(DoctorAppointmentDetailController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +81,15 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   Center(
                       child: TextButton(
                           onPressed: () async {
-                            await appointmentDetailController.cancelAppointment(
-                                widget.appointmentId, widget.doctorId);
-                            Get.back();
+                            authController.isUser.value == true
+                                ? await appointmentDetailController
+                                    .cancelAppointment(
+                                        widget.appointmentId, widget.doctorId)
+                                : await doctorAppointmentDetailController
+                                    .cancelAppointment(widget.appointmentId);
+                            authController.isUser.value == true
+                                ? Get.offAllNamed(AppRoutes.userHome)
+                                : Get.offAllNamed(AppRoutes.doctorHome);
                           },
                           child: Text(
                             "Cancel Appointment",
