@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:aetherwell/models/predictions.dart';
 import 'package:aetherwell/utils/constants.dart';
+import 'package:aetherwell/views/screens/user/user_recommendation_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
@@ -57,7 +58,7 @@ class UserRecommendationController extends GetxController {
   }
 
   Future<List<Pridections>> getResponse() async {
-    final Uri url = Uri.parse('$kFlaskApiUrl/predict');
+    final Uri url = Uri.parse('http://10.0.2.2:4000/predict/');
     final body = jsonEncode(
       {
         'symptoms': selectedItems.map((element) => element).toList(),
@@ -75,7 +76,15 @@ class UserRecommendationController extends GetxController {
     // replace \u000b with whitespace
     print(response.body);
     final data = response.body.replaceAll(RegExp(r'\\u000b'), ' ');
-
+    if (response.statusCode != 200) {
+      Get.snackbar(
+        'Error',
+        'An error occurred. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+      );
+      return [];
+    }
     final decodedData = jsonDecode(data) as Map<String, dynamic>;
     final decodedResult = decodedData['result'] as List<dynamic>;
     final List<Pridections> result =
@@ -100,22 +109,8 @@ class UserRecommendationController extends GetxController {
     displayTip();
     final pridections = await getResponse();
     isLoading.value = false;
-    Get.defaultDialog(
-      title: 'Diagnosis',
-      content: SizedBox(
-        height: 300,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              for (final pridection in pridections)
-                ListTile(
-                  title: Text(pridection.diagnose),
-                  subtitle: Text('Prediction: ${pridection.prediction}'),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
+    Get.to(() => UserRecommendationSelection(
+          diseasesPrediction: pridections.map((e) => e.diagnose).toList(),
+        ));
   }
 }

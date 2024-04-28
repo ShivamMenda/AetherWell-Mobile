@@ -73,16 +73,6 @@ class UserAppointmentBookingController extends GetxController {
     //getSlots();
   }
 
-  void getDisabledDates() {
-    for (int i = 0; i <= 7; i++) {
-      DateTime currentDate = startTime.add(Duration(days: i));
-      if (currentDate.weekday == 6 || currentDate.weekday == 7) {
-        // 6 is Saturday, 7 is Sunday
-        disabledTime.add(currentDate);
-      }
-    }
-  }
-
   late Doctor? doctor = Get.arguments;
   final EasyInfiniteDateTimelineController controller =
       EasyInfiniteDateTimelineController();
@@ -97,7 +87,6 @@ class UserAppointmentBookingController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    getDisabledDates();
     super.onInit();
   }
 
