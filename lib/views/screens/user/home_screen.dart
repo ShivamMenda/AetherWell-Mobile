@@ -65,7 +65,7 @@ class UserHomeScreen extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                "No Appointments found!",
+                                "No Appointments found for Today!",
                                 style: TextStyle(fontSize: 20.sp),
                               ),
                             ),
