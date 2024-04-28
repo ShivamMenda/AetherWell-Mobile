@@ -192,42 +192,45 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
                                     ),
                                   ),
                                   // Third Column depending on status
-                                  Container(
-                                    width:
-                                        60, // Fixed width for both containers
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10),
-                                        bottomRight: Radius.circular(15),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width:
+                                          60, // Fixed width for both containers
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(15),
+                                        ),
                                       ),
-                                    ),
-                                    padding: const EdgeInsets.all(8),
-                                    child: const Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center, // Align text to center horizontally
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Icon(
-                                          Icons.keyboard_arrow_right,
-                                          color: Colors.white70,
-                                          size: 36,
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          "More\nDetails",
-                                          style: TextStyle(
-                                              color: Colors.white70,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        SizedBox(height: 8),
-                                      ],
+                                      padding: const EdgeInsets.all(8),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center, // Align text to center horizontally
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Icon(
+                                            Icons.keyboard_arrow_right,
+                                            color: Colors.white70,
+                                            size: 36,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            "More\nDetails",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12),
+                                          ),
+                                          SizedBox(height: 8),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
