@@ -125,31 +125,33 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                   ],
                                 ),
                                 child: GestureDetector(
-                                  onTap: (){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AppointmentDetails(
-                                          appointmentId:doctorAppointmentController
-                                              .appointmentList[index].id.oid,
-                                          startTime: doctorAppointmentController
-                                              .appointmentList[index].startTime,
-                                          endTime: doctorAppointmentController
-                                              .appointmentList[index].endTime,
-                                          status: doctorAppointmentController
-                                              .appointmentList[index].status.name,
-                                          date: doctorAppointmentController
-                                              .appointmentList[index].date.toIso8601String().substring(0,10),
-                                          patientName:doctorAppointmentController
-                                              .appointmentList[index].userId['name'],
-                                          doctorName: doctorAppointmentController
-                                              .appointmentList[index].doctorId['name'],
-                                          doctorId: doctorAppointmentController
-                                              .appointmentList[index].doctorId['_id'],
-                                        ),
+                                  onTap: () {
+                                    Get.to(
+                                      AppointmentDetails(
+                                        appointmentId:
+                                            doctorAppointmentController
+                                                .appointmentList[index].id.oid,
+                                        startTime: doctorAppointmentController
+                                            .appointmentList[index].startTime,
+                                        endTime: doctorAppointmentController
+                                            .appointmentList[index].endTime,
+                                        status: doctorAppointmentController
+                                            .appointmentList[index].status.name,
+                                        date: doctorAppointmentController
+                                            .appointmentList[index].date
+                                            .toIso8601String()
+                                            .substring(0, 10),
+                                        patientName: doctorAppointmentController
+                                            .appointmentList[index]
+                                            .userId['name'],
+                                        doctorName: doctorAppointmentController
+                                            .appointmentList[index]
+                                            .doctorId['name'],
+                                        doctorId: doctorAppointmentController
+                                            .appointmentList[index]
+                                            .doctorId['_id'],
                                       ),
                                     );
-
                                   },
                                   child: SizedBox(
                                     height:
@@ -168,7 +170,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                           Container(
                                             decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(10),
+                                                    topLeft:
+                                                        Radius.circular(10),
                                                     bottomLeft:
                                                         Radius.circular(15)),
                                                 color: Colors.blueAccent),
@@ -182,7 +185,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                 SizedBox(height: 8),
                                                 Text(
                                                   doctorAppointmentController
-                                                      .appointmentList[index].date
+                                                      .appointmentList[index]
+                                                      .date
                                                       .toIso8601String()
                                                       .substring(0, 10),
                                                   style: TextStyle(
@@ -210,7 +214,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                         index],
                                                     style: TextStyle(
                                                       color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                   SizedBox(height: 8),
@@ -218,7 +223,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                     "Start Time",
                                                     style: TextStyle(
                                                       color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                   Text(
@@ -226,7 +232,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                         .appointmentList[index]
                                                         .startTime,
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                   SizedBox(height: 8),
@@ -234,7 +241,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                     "End Time",
                                                     style: TextStyle(
                                                       color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                   Text(
@@ -242,7 +250,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                         .appointmentList[index]
                                                         .endTime,
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ],
@@ -256,7 +265,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
-                                                bottomRight: Radius.circular(15),
+                                                bottomRight:
+                                                    Radius.circular(15),
                                               ),
                                             ),
                                             padding: EdgeInsets.all(8),
@@ -281,7 +291,8 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                                   "More\nDetails",
                                                   style: TextStyle(
                                                       color: Colors.white70,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 12),
                                                 ),
                                                 SizedBox(height: 8),
