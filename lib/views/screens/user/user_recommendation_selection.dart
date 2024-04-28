@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserRecommendationSelection extends StatefulWidget {
   final List<String> diseasesPrediction;
@@ -9,10 +10,12 @@ class UserRecommendationSelection extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _UserRecommendationSelectionState createState() => _UserRecommendationSelectionState();
+  _UserRecommendationSelectionState createState() =>
+      _UserRecommendationSelectionState();
 }
 
-class _UserRecommendationSelectionState extends State<UserRecommendationSelection> {
+class _UserRecommendationSelectionState
+    extends State<UserRecommendationSelection> {
   int? selectedIndex;
 
   @override
@@ -33,9 +36,12 @@ class _UserRecommendationSelectionState extends State<UserRecommendationSelectio
                 textColor: index < 6
                     ? (index < 3 ? Colors.red : Colors.amber)
                     : Colors.white70,
-                title: Text(widget.diseasesPrediction[index],style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                title: Text(
+                  widget.diseasesPrediction[index],
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 leading: Checkbox(
-                  activeColor:index < 6
+                  activeColor: index < 6
                       ? (index < 3 ? Colors.red : Colors.amber)
                       : Colors.white70,
                   value: selectedIndex == index,
@@ -61,7 +67,8 @@ class _UserRecommendationSelectionState extends State<UserRecommendationSelectio
         child: const Icon(Icons.check),
         onPressed: () {
           if (selectedIndex != null) {
-            _showConfirmationDialog(context, widget.diseasesPrediction[selectedIndex!]);
+            _showConfirmationDialog(
+                context, widget.diseasesPrediction[selectedIndex!]);
           } else {
             _showErrorDialog(context); // Alert if no item is selected
           }
@@ -80,7 +87,7 @@ class _UserRecommendationSelectionState extends State<UserRecommendationSelectio
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
               },
               child: const Text("OK"),
             ),
@@ -100,7 +107,7 @@ class _UserRecommendationSelectionState extends State<UserRecommendationSelectio
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
               },
               child: const Text("OK"),
             ),

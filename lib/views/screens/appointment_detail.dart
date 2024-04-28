@@ -1,6 +1,7 @@
 import 'package:aetherwell/controllers/appointment_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class AppointmentDetails extends StatefulWidget {
   final String appointmentId;
   final String startTime;
@@ -27,7 +28,7 @@ class AppointmentDetails extends StatefulWidget {
 }
 
 class _AppointmentDetailsState extends State<AppointmentDetails> {
-  final appointmentDetailController=Get.put(AppointmentDetailController());
+  final appointmentDetailController = Get.put(AppointmentDetailController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +41,6 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Card(
-
             elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
@@ -50,14 +50,19 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Center(
                     child: CircleAvatar(
-                      backgroundImage:NetworkImage("https://t3.ftcdn.net/jpg/02/60/79/68/360_F_260796882_QyjDubhDDk0RZXV9z7XBEw9AKnWCizXy.jpg"),
+                      backgroundImage: NetworkImage(
+                          "https://t3.ftcdn.net/jpg/02/60/79/68/360_F_260796882_QyjDubhDDk0RZXV9z7XBEw9AKnWCizXy.jpg"),
                       radius: 80,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   _buildInfoRow('Appointment ID:', widget.appointmentId),
                   _buildInfoRow('Patient Name:', widget.patientName),
                   _buildInfoRow('Doctor Name:', widget.doctorName),
@@ -65,18 +70,29 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
                   _buildInfoRow('Start Time:', widget.startTime),
                   _buildInfoRow('End Time:', widget.endTime),
                   _buildInfoRow('Status:', widget.status),
-                  SizedBox(height: 10,),
-                  Center(child: TextButton(onPressed: ()async{
-                    await appointmentDetailController.cancelAppointment(widget.appointmentId, widget.doctorId);
-                    Navigator.pop(context);
-                  }, child:Text("Cancel Appointment",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),))),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                      child: TextButton(
+                          onPressed: () async {
+                            await appointmentDetailController.cancelAppointment(
+                                widget.appointmentId, widget.doctorId);
+                            Get.back();
+                          },
+                          child: Text(
+                            "Cancel Appointment",
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ))),
                 ],
               ),
             ),
           ),
         ),
       ),
-
     );
   }
 
@@ -107,4 +123,3 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
     );
   }
 }
-
