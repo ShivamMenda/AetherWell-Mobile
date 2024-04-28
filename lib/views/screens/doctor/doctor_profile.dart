@@ -3,8 +3,6 @@ import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
 
@@ -26,7 +24,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
         backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
             onPressed: () {
               doctorProfileController.authController.logout();
             },
@@ -59,7 +60,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/doctor_profile.jpeg"), // Replace the URL with any image URL
+                      backgroundImage: AssetImage(
+                          "assets/images/doctor_profile.jpeg"), // Replace the URL with any image URL
                       radius: 50,
                       backgroundColor: Colors.blueAccent,
                     ),
@@ -70,16 +72,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         children: [
                           _buildTextFormField(doctorProfileController.name,
                               "Name", Icons.person),
-                          _buildTextFormField(
-                              doctorProfileController.phone, "Phone", Icons.phone),
+                          _buildTextFormField(doctorProfileController.phone,
+                              "Phone", Icons.phone),
                         ],
                       ),
                     ),
                   ],
                 ),
-                _buildTextFormField(doctorProfileController.email,
-                    "Email", Icons.email),
-
+                _buildTextFormField(
+                    doctorProfileController.email, "Email", Icons.email),
                 const SizedBox(height: 10),
                 _buildTextFormField(doctorProfileController.aboutController,
                     "About me", Icons.text_rotation_angledown_sharp),
@@ -98,25 +99,25 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 _buildTextFormField(doctorProfileController.clinic,
                     "Clinic / Hospital", Icons.local_hospital),
                 const SizedBox(height: 10),
-                _buildTextFormField(doctorProfileController.gender,
-                    "Gender", Icons.timer),
+                _buildTextFormField(
+                    doctorProfileController.gender, "Gender", Icons.timer),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blueAccent,
-        child: const Icon(Icons.edit, color: Colors.white),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return _buildBottomSheet();
-            },
-          );
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.blueAccent,
+      //   child: const Icon(Icons.edit, color: Colors.white),
+      //   onPressed: () {
+      //     showModalBottomSheet(
+      //       context: context,
+      //       builder: (BuildContext context) {
+      //         return _buildBottomSheet();
+      //       },
+      //     );
+      //   },
+      // ),
       // bottomSheet: showBottomSheet ? _buildBottomSheet() : null,
     );
   }
@@ -156,8 +157,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
               "Specialization", Icons.category),
           _buildTextField(doctorProfileController.clinic, "Clinic / Hospital",
               Icons.local_hospital),
-          _buildTextField(doctorProfileController.aboutController,
-              "About me", Icons.timer),
+          _buildTextField(
+              doctorProfileController.aboutController, "About me", Icons.timer),
           const SizedBox(height: 16),
           MaterialButton(
             onPressed: () {},
@@ -178,10 +179,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
         labelText: label,
         prefixIcon: Icon(icon),
         labelStyle: const TextStyle(color: Colors.white70),
-        enabledBorder:
-            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-        focusedBorder:
-            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+        enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white)),
+        focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white70)),
       ),
       style: const TextStyle(color: Colors.white70),
     );
