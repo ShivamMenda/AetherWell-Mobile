@@ -33,7 +33,7 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
                 height: 10,
               ),
               const Text(
-                "Select Your Preffered Doctor",
+                "Select Your Prefered Doctor",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 24,
@@ -73,7 +73,7 @@ class _ListOfDoctorsScreenState extends State<ListOfDoctorsScreen> {
                                       Row(
                                         children: [
                                           const CircleAvatar(
-                                            radius: 30,
+                                            radius: 25,
                                             backgroundColor: Colors.blueGrey,
                                             backgroundImage: NetworkImage(
                                               "https://source.unsplash.com/featured/?doctor",

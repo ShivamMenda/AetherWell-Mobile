@@ -134,8 +134,14 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
                                         const Icon(Icons.date_range_outlined,
                                             color: Colors.white70),
                                         SizedBox(height: 2.h),
-                                        const Text(
-                                          "20-04-2024",
+                                        Text(
+                                          userAppointmentsController
+                                              .appointmentList[index].date
+                                              .toIso8601String()
+                                              .substring(0, 10)
+                                              .split('-')
+                                              .reversed
+                                              .join('-'),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

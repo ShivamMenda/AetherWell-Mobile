@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -52,7 +50,7 @@ class PatientRecordTile extends StatelessWidget {
             ),
           ),
         ),
-        height: Get.height / 4.2,
+        height: Get.height / 4,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
