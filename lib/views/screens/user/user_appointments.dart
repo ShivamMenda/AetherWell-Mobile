@@ -208,39 +208,43 @@ class _UserAppointmentScreenState extends State<UserAppointmentScreen> {
                                       // Third Column depending on status
                                       InkWell(
                                         onTap: () {
-                                          Get.to(AppointmentDetails(
-                                            appointmentId:
-                                                userAppointmentsController
-                                                    .appointmentList[index]
-                                                    .id
-                                                    .oid,
-                                            startTime:
-                                                userAppointmentsController
-                                                    .appointmentList[index]
-                                                    .startTime,
-                                            endTime: userAppointmentsController
-                                                .appointmentList[index].endTime,
-                                            status: userAppointmentsController
-                                                .appointmentList[index]
-                                                .status
-                                                .name,
-                                            date: userAppointmentsController
-                                                .appointmentList[index].date
-                                                .toIso8601String()
-                                                .substring(0, 10)
-                                                .split('-')
-                                                .reversed
-                                                .join('-'),
-                                            patientName:
-                                                authController.user.name,
-                                            doctorName:
-                                                userAppointmentsController
-                                                    .appointmentList[index]
-                                                    .doctorName,
-                                            doctorId: userAppointmentsController
-                                                .appointmentList[index]
-                                                .doctorId['_id'],
-                                          ));
+                                          Get.to(() => AppointmentDetails(
+                                                appointmentId:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .id
+                                                        .oid,
+                                                startTime:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .startTime,
+                                                endTime:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .endTime,
+                                                status:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .status
+                                                        .name,
+                                                date: userAppointmentsController
+                                                    .appointmentList[index].date
+                                                    .toIso8601String()
+                                                    .substring(0, 10)
+                                                    .split('-')
+                                                    .reversed
+                                                    .join('-'),
+                                                patientName:
+                                                    authController.user.name,
+                                                doctorName:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .doctorName,
+                                                doctorId:
+                                                    userAppointmentsController
+                                                        .appointmentList[index]
+                                                        .doctorId['_id'],
+                                              ));
                                         },
                                         child: Container(
                                           width:

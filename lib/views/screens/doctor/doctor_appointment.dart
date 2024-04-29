@@ -3,6 +3,7 @@ import 'package:aetherwell/views/screens/appointment_detail.dart';
 import 'package:aetherwell/views/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../routes/app_routes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -127,7 +128,7 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                 child: GestureDetector(
                                   onTap: () {
                                     Get.to(
-                                      AppointmentDetails(
+                                      () => AppointmentDetails(
                                         appointmentId:
                                             doctorAppointmentController
                                                 .appointmentList[index].id.oid,
@@ -306,8 +307,18 @@ class _DoctorAppointmentScreenState extends State<DoctorAppointmentScreen> {
                                 ),
                               );
                             })
-                        : Center(
-                            child: Text("No Appointments"),
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Center(
+                                child: Text(
+                                  "No Appointments found for Today!",
+                                  style: TextStyle(fontSize: 20.sp),
+                                ),
+                              ),
+                            ],
                           )),
               ],
             )),
