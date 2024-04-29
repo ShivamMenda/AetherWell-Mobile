@@ -80,7 +80,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           userProfileController.phone, "Phone", Icons.phone),
                       SizedBox(height: 1.h),
                       _buildTextFormField(
-                          userProfileController.name, "Gender", Icons.info),
+                          userProfileController.gender, "Gender", Icons.info),
                       SizedBox(height: 1.h),
                       _buildTextFormField(
                           userProfileController.address, "Address", Icons.home),
