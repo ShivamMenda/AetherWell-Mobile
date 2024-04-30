@@ -14,23 +14,7 @@ import '../../models/doctor.dart';
 class UserAppointmentBookingController extends GetxController {
   RxBool isLoading = false.obs;
 
-  RxList<String> slots = <String>[
-    "7:00 AM",
-    "8:00 AM",
-    "9:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:00 PM",
-    "1:00 PM",
-    "2:00 PM",
-    "3:00 PM",
-    "4:00 PM",
-    "5:00 PM",
-    "6:00 PM",
-    "7:00 PM",
-    "8:00 PM",
-    "9:00 PM",
-  ].obs;
+  RxList<String> slots = <String>[].obs;
 
   void getSlots() async {
     isLoading.value = true;
@@ -46,7 +30,7 @@ class UserAppointmentBookingController extends GetxController {
         "$kNodeApiUrl/api/v1/doctors/getAvailableSlots/${doctor!.id.oid}");
     convertdate();
     final body = jsonEncode(<String, String>{
-      "date": selectedDate,
+      "date": selectedDate.value,
     });
 
     final response = await http.get(
@@ -82,12 +66,63 @@ class UserAppointmentBookingController extends GetxController {
   List<DateTime> disabledTime = [];
 
   late int selectedIndex = 0;
-  String selectedDate = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  late RxString selectedDate=DateFormat("dd-MM-yyyy").format(DateTime.now()).obs;
   late String selectedSlot = "7:00 AM";
   @override
   void onInit() {
     // TODO: implement onInit
+    getDaysSlots();
     super.onInit();
+  }
+  void getDaysSlots(){
+    slots.clear();
+    DateTime currentTime=new DateTime.now();
+    int hours=currentTime.hour;
+    print(selectedDate);
+    DateTime parsedSelectedDate = DateFormat("dd-MM-yyyy").parse(selectedDate.value);
+    bool isToday = currentTime.year == parsedSelectedDate.year &&
+        currentTime.month == parsedSelectedDate.month &&
+        currentTime.day == parsedSelectedDate.day;
+
+    for(int i=7;i<21;i++){
+
+      if(isToday) {
+        if (i > hours) {
+          slots.add(getTime(i));
+        }
+      }else{
+        slots.add(getTime(i));
+      }
+    }
+    if(slots.isNotEmpty){
+      selectedSlot=slots[0];
+    }else{
+      selectedSlot="";
+    }
+    print(slots);
+  }
+
+  String getTime(int time){
+    String currTime="";
+
+    switch (time){
+      case 7:currTime="7:00";break;
+      case 8:currTime="8:00";break;
+      case 9:currTime="9:00";break;
+      case 10:currTime="10:00";break;
+      case 11:currTime="11:00";break;
+      case 12:currTime="12:00";break;
+      case 13:currTime="13:00";break;
+      case 14:currTime="14:00";break;
+      case 15:currTime="15:00";break;
+      case 16:currTime="16:00";break;
+      case 17:currTime="17:00";break;
+      case 18:currTime="18:00";break;
+      case 19:currTime="19:00";break;
+      case 20:currTime="20:00";break;
+      case 21:currTime="21:00";break;
+    }
+    return currTime;
   }
 
   void converTo24hr() {
@@ -108,11 +143,11 @@ class UserAppointmentBookingController extends GetxController {
   }
 
   void convertdate() {
-    selectedDate = DateFormat("dd-MM-yyyy").format(focusDate);
+    selectedDate.value = DateFormat("dd-MM-yyyy").format(focusDate);
   }
 
   Future bookAppointment(Doctor doctor) async {
-    converTo24hr();
+   // converTo24hr();
     convertdate();
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
@@ -124,7 +159,7 @@ class UserAppointmentBookingController extends GetxController {
 
     final body = jsonEncode(<String, String>{
       "doctorId": doctor.id.oid,
-      "date": selectedDate,
+      "date": selectedDate.value,
       "startTime": selectedSlot,
       "endTime": getEndTime(),
     });

@@ -3,6 +3,7 @@ import 'package:aetherwell/models/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:intl/intl.dart';
 import 'package:radio_grouped_buttons/radio_grouped_buttons.dart';
 
 // ignore: must_be_immutable
@@ -139,8 +140,12 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                   lastDate: userAppointmentBookingController.endTime,
                   onDateChange: (selectedDate) {
                     setState(() {
-                      userAppointmentBookingController.changeDate(selectedDate);
+
+                      userAppointmentBookingController.selectedDate.value=DateFormat("dd-MM-yyyy").format(selectedDate);
+                      userAppointmentBookingController.focusDate=selectedDate;
+
                       userAppointmentBookingController.selectedIndex = 0;
+                      userAppointmentBookingController.getDaysSlots();
                     });
                   }),
               const SizedBox(
@@ -160,8 +165,8 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                   child:
-                      Obx(() => userAppointmentBookingController.isLoading.value
-                          ? const CircularProgressIndicator()
+                      Obx(() => userAppointmentBookingController.slots.isEmpty
+                          ? Center(child: Text("Slots Not Avaiable",style: TextStyle(color: Colors.white70,fontSize: 20),),)
                           : CustomRadioButton(
                               horizontal: true,
                               buttonWidth: 110,
