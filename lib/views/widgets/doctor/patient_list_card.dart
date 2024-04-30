@@ -27,7 +27,7 @@ class PatientRecordTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Random photo URL placeholder
-    String randomPhotoUrl = 'https://source.unsplash.com/200x200/?person';
+    String randomPhotoUrl = 'https://media.istockphoto.com/id/825083568/photo/proud-latin-man.webp?b=1&s=170667a&w=0&k=20&c=CyG-7qRsTApt2se9eMhc-iPBHMj5Yj-ISytCWd3uZzQ=';
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
