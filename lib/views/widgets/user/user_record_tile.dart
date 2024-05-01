@@ -49,7 +49,7 @@ class _UserRecordTileState extends State<UserRecordTile> {
               ),
             ),
           ),
-          height: Get.height / 4.6,
+          height: Get.height / 4,
           width: double.infinity,
           child: Padding(
             padding: EdgeInsets.all(16.0),

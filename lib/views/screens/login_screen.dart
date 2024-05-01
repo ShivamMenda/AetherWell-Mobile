@@ -149,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       onPressed: () async {
+                        Get.snackbar("Loading", "Please wait...");
                         if (formKey.currentState!.validate()) {
                           authController.email.value = emailController.text;
                           authController.password.value =
