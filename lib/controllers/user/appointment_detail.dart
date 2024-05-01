@@ -23,6 +23,7 @@ class AppointmentDetailController extends GetxController {
     });
     final response = await http.delete(url, headers: headers, body: body);
     if (response.statusCode == 200) {
+      print(response.body);
       Get.snackbar(
         'Success',
         'Appointment cancelled successfully',
