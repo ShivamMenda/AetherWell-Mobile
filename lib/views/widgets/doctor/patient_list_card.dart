@@ -27,7 +27,8 @@ class PatientRecordTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Random photo URL placeholder
-    String randomPhotoUrl = 'https://media.istockphoto.com/id/825083568/photo/proud-latin-man.webp?b=1&s=170667a&w=0&k=20&c=CyG-7qRsTApt2se9eMhc-iPBHMj5Yj-ISytCWd3uZzQ=';
+    String randomPhotoUrl =
+        'https://media.istockphoto.com/id/825083568/photo/proud-latin-man.webp?b=1&s=170667a&w=0&k=20&c=CyG-7qRsTApt2se9eMhc-iPBHMj5Yj-ISytCWd3uZzQ=';
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -89,11 +90,9 @@ class PatientRecordTile extends StatelessWidget {
               Text("Contact Number: $contactNumber",
                   style: TextStyle(color: textColor)),
               SizedBox(height: 0.7.h),
-              Text("Past Appointments: $gender",
-                  style: TextStyle(color: textColor)),
+              Text("Gender: $gender", style: TextStyle(color: textColor)),
               SizedBox(height: 0.7.h),
-              Text("Next Appointment Date: $email",
-                  style: TextStyle(color: textColor)),
+              Text("Email: $email", style: TextStyle(color: textColor)),
             ],
           ),
         ),
