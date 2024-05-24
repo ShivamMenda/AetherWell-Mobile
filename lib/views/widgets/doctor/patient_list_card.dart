@@ -51,7 +51,7 @@ class PatientRecordTile extends StatelessWidget {
             ),
           ),
         ),
-        height: Get.height / 4,
+        height: Get.height / 3.6,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
